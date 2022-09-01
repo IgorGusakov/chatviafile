@@ -4,12 +4,13 @@
 
 #ifndef TESTFILE__WORKWITHFILE_H_
 #define TESTFILE__WORKWITHFILE_H_
-#include "string"
+#include <string>
 #include <iostream>
 #include <fstream>
 #include <filesystem>
 #include <utility>
 #include <chrono>
+#include <sstream>
 
 enum class portig_file {
   NONE,
@@ -21,57 +22,31 @@ enum class portig_file {
 
 class WorkWithFile {
  public:
-  explicit WorkWithFile(std::string name_file = "Test.txt", uint64_t max_file_size_ = 5'000'000) : filename(std::move(name_file)), max_file_size(max_file_size_), size_file(0) { //default name test.txt
-  };
+  explicit WorkWithFile(std::string name_file = "Test.txt", uint64_t max_file_size_ = 5'000'000 , bool hash = false) :
+  filename(std::move(name_file)), max_file_size(max_file_size_), hash_option(hash), size_file(0) { };
 
   ~WorkWithFile() {
-    std::cout << "~WorkWithFile()" << std::endl;
     of_strm.close();
-    if_strm.close();
   }
-  void OpenFile(portig_file flag) {
-//    try {
-    switch (flag) {
-      case portig_file::READ: {
-        if_strm.open(filename, std::ios::out | std::ios::in);
-        if(!if_strm.is_open()) {
-          //create file
-          std::ofstream outfile (filename);
-          outfile.close();
-          //reopen
-          if_strm.open(filename, std::ios::out | std::ios::app);
-        }
-        break;
-      }
-      case portig_file::WRITE: {
-        of_strm.open(filename, std::ios::out | std::ios::app);
-        break;
-      }
-      case portig_file::READ_WRITE: {
-        of_strm.open(filename, std::ios::out | std::ios::app);
-        if_strm.open(filename, std::ios_base::in);
-        break;
-      }
-      case portig_file::NONE: {
-
-        break;
-      }
-    }
-
-      size_file = std::filesystem::file_size(filename);
-      std::cout << "Current size in open file  " << size_file << "byte \n";
-  }
+  void OpenFile(portig_file flag);
   void StartHandlerReader();
   void StartHandlerWriter();
 
  private:
+  uint32_t hash_calc(bool write_to_file, bool detected_hash);
+  uint32_t hash_read_from_file();
+  bool check_hash();
+
   std::string filename;
   uint64_t max_file_size;
+  bool hash_option;
   uint32_t size_file;
   std::string str_buf_out;
   std::string str_buf_in;
   std::ofstream of_strm;
-  std::ifstream if_strm;
+//  std::ifstream if_strm;
+
+
 
   //for future(for translate std::filesystem::file_time_type to unix time)
   //now we can not use this
