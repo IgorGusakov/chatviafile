@@ -1,0 +1,78 @@
+\hypertarget{_work_with_file_8h_source}{}\doxysection{/\+Users/igorgusakov/project\+\_\+/test\+\_\+\+Samsung/\+Work\+With\+File.h}
+\mbox{\hyperlink{_work_with_file_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Igor Gusakov on 31.08.2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef TESTFILE\_\_WORKWITHFILE\_H\_}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define TESTFILE\_\_WORKWITHFILE\_H\_}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <filesystem>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <sstream>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 }
+\DoxyCodeLine{19 \textcolor{keyword}{enum class} \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6}{portig\_file}} \{}
+\DoxyCodeLine{20   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ab50339a10e1de285ac99d4c3990b8693}{NONE}},}
+\DoxyCodeLine{21   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6a3466fab4975481651940ed328aa990e4}{READ}},}
+\DoxyCodeLine{22   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ad4b9e47f65b6e79b010582f15785867e}{WRITE}},}
+\DoxyCodeLine{23   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144}{READ\_WRITE}}}
+\DoxyCodeLine{24 \};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{29 \textcolor{keyword}{enum class} \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\_file}} \{}
+\DoxyCodeLine{30   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa1721dbaf18db104f1722faf9f589dbd0}{OPEN\_ERR}},}
+\DoxyCodeLine{31   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa8a568498bd65cd8dd2790c69a1c91dbc}{OPEN\_SUCCESS}},}
+\DoxyCodeLine{32   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa9488f304bb60fd0a160f1210c0ef149e}{HASH\_ERR}},}
+\DoxyCodeLine{33   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779faf7e0d0b2e511f354279d96a001b5af82}{HASH\_OK}}}
+\DoxyCodeLine{34 \};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 }
+\DoxyCodeLine{42 \textcolor{keyword}{class }\mbox{\hyperlink{class_work_with_file}{WorkWithFile}} \{}
+\DoxyCodeLine{43  \textcolor{keyword}{public}:}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{52   \textcolor{keyword}{explicit} \mbox{\hyperlink{class_work_with_file_a6a2481b2fec833b972b1db596b93e7cf}{WorkWithFile}}(std::string name\_file = \textcolor{stringliteral}{"{}Test.txt"{}}, uint64\_t max\_file\_size\_ = 5'000'000 , \textcolor{keywordtype}{bool} hash = \textcolor{keyword}{false}) :}
+\DoxyCodeLine{53   filename(std::move(name\_file)), max\_file\_size(max\_file\_size\_), hash\_option(hash), size\_file(0) \{}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55   \};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57   \mbox{\hyperlink{class_work_with_file_a697f8b712aa59199e081f8294eeb2cd9}{\string~WorkWithFile}}() \{}
+\DoxyCodeLine{58     of\_strm.close();}
+\DoxyCodeLine{59   \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\_file}} \mbox{\hyperlink{class_work_with_file_a636f93140cd0f29f32e1d3545b6f8053}{OpenFile}}();}
+\DoxyCodeLine{62   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_work_with_file_af2c8c975add0419a07af653c80508aaa}{StartHandlerReader}}();}
+\DoxyCodeLine{63   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_work_with_file_ac3884159176a63fa37353d07a1db4d78}{StartHandlerWriter}}();}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65  \textcolor{keyword}{private}:}
+\DoxyCodeLine{66   uint32\_t hash\_calc(\textcolor{keywordtype}{bool} write\_to\_file, \textcolor{keywordtype}{bool} detected\_hash);}
+\DoxyCodeLine{67   uint32\_t hash\_read\_from\_file();}
+\DoxyCodeLine{68   \textcolor{keywordtype}{bool} check\_hash();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70   std::string filename; }
+\DoxyCodeLine{71   uint64\_t max\_file\_size; }
+\DoxyCodeLine{72   \textcolor{keywordtype}{bool} hash\_option; }
+\DoxyCodeLine{73   uint32\_t size\_file; }
+\DoxyCodeLine{74   std::string str\_buf\_out; }
+\DoxyCodeLine{75   std::string str\_buf\_in; }
+\DoxyCodeLine{76   std::ofstream of\_strm; }
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80   \textcolor{comment}{//for future(for translate std::filesystem::file\_time\_type to unix time)}}
+\DoxyCodeLine{81   \textcolor{comment}{//now we can not use this}}
+\DoxyCodeLine{82   \textcolor{keyword}{template} <\textcolor{keyword}{typename} TP>}
+\DoxyCodeLine{83   std::time\_t to\_time\_t(TP tp)}
+\DoxyCodeLine{84   \{}
+\DoxyCodeLine{85     \textcolor{keyword}{using namespace }std::chrono;}
+\DoxyCodeLine{86     \textcolor{keyword}{auto} sctp = time\_point\_cast<system\_clock::duration>(tp -\/ TP::clock::now() + system\_clock::now());}
+\DoxyCodeLine{87     \textcolor{keywordflow}{return} system\_clock::to\_time\_t(sctp);}
+\DoxyCodeLine{88   \}}
+\DoxyCodeLine{89 \};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//TESTFILE\_\_WORKWITHFILE\_H\_}}
+
+\end{DoxyCode}

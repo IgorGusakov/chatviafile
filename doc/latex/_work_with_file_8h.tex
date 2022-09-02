@@ -1,0 +1,88 @@
+\hypertarget{_work_with_file_8h}{}\doxysection{/\+Users/igorgusakov/project\+\_\+/test\+\_\+\+Samsung/\+Work\+With\+File.h File Reference}
+\label{_work_with_file_8h}\index{/Users/igorgusakov/project\_/test\_Samsung/WorkWithFile.h@{/Users/igorgusakov/project\_/test\_Samsung/WorkWithFile.h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6}{portig\+\_\+file}} \{ \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ab50339a10e1de285ac99d4c3990b8693}{NONE}}
+, \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6a3466fab4975481651940ed328aa990e4}{READ}}
+, \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ad4b9e47f65b6e79b010582f15785867e}{WRITE}}
+, \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144}{READ\+\_\+\+WRITE}}
+ \}
+\begin{DoxyCompactList}\small\item\em enum class to define file operation \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\+\_\+file}} \{ \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa1721dbaf18db104f1722faf9f589dbd0}{OPEN\+\_\+\+ERR}}
+, \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa8a568498bd65cd8dd2790c69a1c91dbc}{OPEN\+\_\+\+SUCCESS}}
+, \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa9488f304bb60fd0a160f1210c0ef149e}{HASH\+\_\+\+ERR}}
+, \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779faf7e0d0b2e511f354279d96a001b5af82}{HASH\+\_\+\+OK}}
+ \}
+\begin{DoxyCompactList}\small\item\em enum class to state about open file \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}\label{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}} 
+\index{WorkWithFile.h@{WorkWithFile.h}!open\_file@{open\_file}}
+\index{open\_file@{open\_file}!WorkWithFile.h@{WorkWithFile.h}}
+\doxysubsubsection{\texorpdfstring{open\_file}{open\_file}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\+\_\+file}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+enum class to state about open file 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPEN\_ERR@{OPEN\_ERR}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!OPEN\_ERR@{OPEN\_ERR}}}\mbox{\Hypertarget{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa1721dbaf18db104f1722faf9f589dbd0}\label{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa1721dbaf18db104f1722faf9f589dbd0}} 
+OPEN\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPEN\_SUCCESS@{OPEN\_SUCCESS}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!OPEN\_SUCCESS@{OPEN\_SUCCESS}}}\mbox{\Hypertarget{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa8a568498bd65cd8dd2790c69a1c91dbc}\label{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa8a568498bd65cd8dd2790c69a1c91dbc}} 
+OPEN\+\_\+\+SUCCESS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HASH\_ERR@{HASH\_ERR}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!HASH\_ERR@{HASH\_ERR}}}\mbox{\Hypertarget{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa9488f304bb60fd0a160f1210c0ef149e}\label{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa9488f304bb60fd0a160f1210c0ef149e}} 
+HASH\+\_\+\+ERR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HASH\_OK@{HASH\_OK}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!HASH\_OK@{HASH\_OK}}}\mbox{\Hypertarget{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779faf7e0d0b2e511f354279d96a001b5af82}\label{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779faf7e0d0b2e511f354279d96a001b5af82}} 
+HASH\+\_\+\+OK&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6}\label{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6}} 
+\index{WorkWithFile.h@{WorkWithFile.h}!portig\_file@{portig\_file}}
+\index{portig\_file@{portig\_file}!WorkWithFile.h@{WorkWithFile.h}}
+\doxysubsubsection{\texorpdfstring{portig\_file}{portig\_file}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6}{portig\+\_\+file}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+enum class to define file operation 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NONE@{NONE}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!NONE@{NONE}}}\mbox{\Hypertarget{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ab50339a10e1de285ac99d4c3990b8693}\label{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ab50339a10e1de285ac99d4c3990b8693}} 
+NONE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{READ@{READ}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!READ@{READ}}}\mbox{\Hypertarget{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6a3466fab4975481651940ed328aa990e4}\label{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6a3466fab4975481651940ed328aa990e4}} 
+READ&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WRITE@{WRITE}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!WRITE@{WRITE}}}\mbox{\Hypertarget{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ad4b9e47f65b6e79b010582f15785867e}\label{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ad4b9e47f65b6e79b010582f15785867e}} 
+WRITE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{READ\_WRITE@{READ\_WRITE}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!READ\_WRITE@{READ\_WRITE}}}\mbox{\Hypertarget{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144}\label{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144}} 
+READ\+\_\+\+WRITE&\\
+\hline
+
+\end{DoxyEnumFields}
