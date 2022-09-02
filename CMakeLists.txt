@@ -2,14 +2,12 @@ cmake_minimum_required(VERSION 3.13)
 project(testfile)
 
 set(CMAKE_CXX_STANDARD 17)
-
+find_package(Threads REQUIRED)
 add_executable(testfile main.cpp WorkWithFile.h WorkWithFile.cpp)
-
+target_link_libraries(testfile PRIVATE Threads::Threads)
 
 ###########################################################################
 # Unit Test
-find_package(Threads REQUIRED)
-
 include(FetchContent)
 
 FetchContent_Declare(
