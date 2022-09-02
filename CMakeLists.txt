@@ -3,7 +3,7 @@ project(testfile)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(testfile main.cpp ReadFile.h WorkWithFile.h WorkWithFile.cpp)
+add_executable(testfile main.cpp WorkWithFile.h WorkWithFile.cpp)
 
 
 ###########################################################################
