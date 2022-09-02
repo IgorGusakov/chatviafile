@@ -7,7 +7,9 @@
 
 
 /**
- * @brief Determine if the three lengths provided could form a valid Triangle object.
+ * @brief Method for opening a file into a stream, checks if the file is open,
+ * if the file is not found, the stream will create a new one,
+ * the Hash is also read if it is included in the options.
  */
 open_file WorkWithFile::OpenFile()
 {
