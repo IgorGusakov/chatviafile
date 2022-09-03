@@ -23,21 +23,21 @@ int main(int argc, char *argv[]) {
       //read only
       if (option == "-r") {    //!<parser  argument -r
         flag_open = portig_file::READ;
-        std::cout << "turn on option only read file\n";
+        std::cout << " - turn on option only read file\n";
       }
       //write only
       else if(option == "-w") {    //!<parser  argument -w
         flag_open = portig_file::WRITE;
-        std::cout << "turn on option only write file\n";
+        std::cout << " - turn on option only write file\n";
       }
       //read and write only
       else if(option == "-rw") {  //!<parser  argument -rw
         flag_open = portig_file::READ_WRITE;
-        std::cout << "turn on option read and write file\n";
+        std::cout << " - turn on option read and write file\n";
       }
       //CRC file
       if (option == "-crc") { //!<parser  argument -crc
-        std::cout << "turn on option -crc\n";
+        std::cout << " - turn on option -crc\n";
         flag_hash = true;
       }
     }

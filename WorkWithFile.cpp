@@ -25,12 +25,13 @@ open_file WorkWithFile::OpenFile()
   if(hash_option) {
     //read hash if hash is not present in file so create
     std::cout << "Hash is working..."<<'\n';
-    uint32_t hash_file = hash_read_from_file();
-    std::cout << "Current hash : "<<std::hex<<hash_file<<std::dec<<'\n';
+    check_hash();
+//    uint32_t hash_file = hash_read_from_file();
+//    std::cout << "Current hash : "<<std::hex<<hash_file<<std::dec<<'\n';
   }
 
   size_file = std::filesystem::file_size(filename); // read file size
-  std::cout << "Current size in open file  " <<std::dec << size_file << "byte \n";
+  std::cout << "Current size in open file  " <<std::dec << size_file << " byte \n";
 
   return status;
 }
@@ -59,7 +60,7 @@ void WorkWithFile::StartHandlerWriter() {
       //check on.off work with hash
       if(hash_option) {
         uint32_t hash = hash_calc(true,true);
-        std::cout<<"hash file changed : " <<std::hex << hash <<"\n";
+        std::cout<<"hash write file changed : " <<std::hex << hash <<"\n";
       }
       else { //just write to the end file
         //todo: will add check update file
@@ -67,11 +68,11 @@ void WorkWithFile::StartHandlerWriter() {
         of_strm.flush();
       }
 
-      std::cout << "Size messages: " <<std::dec<< str_buf_out.length() << "byte \n";
+      std::cout << "Size write messages: " <<std::dec<< str_buf_out.length() << " byte \n";
       //sum size_file to maintain file size
       size_file += str_buf_out.length();
 //      str_buf_out.clear();
-      std::cout << "Size file: " <<std::dec<< size_file << "byte \n";
+      std::cout << "Size file: " <<std::dec<< size_file << " byte \n";
     }
     //if size file > 5Mb close handler
     std::cout << "File size more 5Mb and Exit" << std::endl;
@@ -92,12 +93,9 @@ void WorkWithFile::StartHandlerWriter() {
 
  * This method requires a refactoring for the following reasons
  * @warning 1. infinite loop checking file size is CPU intensive,
- * need file change callback to silently report it
+ * need file change callback to silently report it, perhaps synchronization via sockets or shared mem
  * @warning 2. if_strm.clear() should update the stream this allowed
  * std::filesystem::file_size to use if_strm.tellg()
- * @warning 3. perhaps synchronization via sockets or shared mem is needed to work with hash,
- * since overwriting a large file may take longer and an intermediate file change during writing
- * may give a false file change
  */
 void WorkWithFile::StartHandlerReader() {
   std::ifstream if_strm(filename, std::ios_base::in);
@@ -112,10 +110,10 @@ void WorkWithFile::StartHandlerReader() {
 
 
     auto size_old = std::filesystem::file_size(filename);
-
     ///Fixme: this While(true) is overload work processor
     while (true) {
-      if (size_old != std::filesystem::file_size(filename)) {
+      auto size_current = std::filesystem::file_size(filename);
+      if (size_old != size_current && size_current > 0) { //when we full erase file size_current > 0
         if_strm.close();
         if(hash_option)
           check_hash();
@@ -123,8 +121,8 @@ void WorkWithFile::StartHandlerReader() {
           ///todo: did not work if_strm.clear();???
           if_strm.open(filename);
           if_strm.seekg(static_cast<long long>(size_old));
-          uint32_t messages_size = std::filesystem::file_size(filename) - size_old;
-          size_old = std::filesystem::file_size(filename);
+          uint32_t messages_size = size_current - size_old;
+          size_old = size_current;
           if (size_old >= max_file_size) {
             std::cout << "File size more 5Mb and Exit" << std::endl;
             break;
@@ -132,7 +130,7 @@ void WorkWithFile::StartHandlerReader() {
           while (getline(if_strm, str_buf_in)) {
 //            hash_calc(false,true);
             std::cout << "\nRead new message from file: " << str_buf_in << std::endl;
-            std::cout << "Size new message from file: " << messages_size << "bytes"<< std::endl;
+            std::cout << "Size read new message from file: " << messages_size << " bytes"<< std::endl;
 //            if_strm.clear(); //< Now we can read again if_stream, but...
           }
         }
@@ -157,34 +155,20 @@ void WorkWithFile::StartHandlerReader() {
  * false - hash label has in file
  * @return uint32_t hash.
  *
- * @warning after the test, it was noticed that when writing quickly,
- * the queue from the stream produces empty data and the calculated hash is not valid
  */
 uint32_t WorkWithFile::hash_calc(bool write_to_file, bool detected_hash) {
-  std::ifstream readfile(filename);
-  std::string str_buf; //buffer read data if_stream
-  //to quickly copy input from a stream, since copying string to string takes more time than emplace back
-  std::deque<std::string> queue_;
+  std::ifstream readfile(filename, std::ios::in);
   std::string str_file;//object copy file for rewrite new hash
+  std::stringstream buffer_from_file;
   uint32_t hash{0};
   readfile.seekg(0);// pos begin file
   //read file
-  if(readfile.is_open()) {
-    while (getline(readfile, str_buf)) {
-      str_buf.push_back('\n');
-      //str to fast emplace_back
-      queue_.emplace_back(str_buf);
-    }
-    //copy deque to str
-    for(const std::string& str : queue_) {
-      str_file.append(str);
-    }
-  }
+  buffer_from_file << readfile.rdbuf();
+  str_file = buffer_from_file.str();
   //if hash is has
   if(detected_hash) {
     str_file.erase(0, 18); //delete hash from begin
   }
-
   //rewrite new hash with all information to file
   if(write_to_file) {
     //added data from cin>>
@@ -206,7 +190,6 @@ uint32_t WorkWithFile::hash_calc(bool write_to_file, bool detected_hash) {
   }
     //Only calc hash
   else {
-//    std::cout<<"Only calc hash2 "<< str_file<<"\n";
     hash = std::hash<std::string>{}(str_file);
   }
 
@@ -221,24 +204,20 @@ uint32_t WorkWithFile::hash_calc(bool write_to_file, bool detected_hash) {
  *
  */
 uint32_t WorkWithFile::hash_read_from_file() {
-  std::ifstream readfile(filename);
+  std::ifstream readfile(filename, std::ios::in);
   std::string str_buf;
   uint32_t hash{0};
   readfile.seekg(0); //lock for from start file
-  while (getline(readfile, str_buf,'>')) { //lock for > from <;hash:20982937;>
-//    std::cout<<"str_buf "<<str_buf<<"\n";
-    size_t symbol = str_buf.find("<;hash:");//lock for hash mark
-    if(!symbol) {
-      symbol += 7; //--> <;hash:
-//      std::cout<<"str_buf.substr(symbol, 8) :  "<<str_buf.substr(symbol, 8)<<"\n";
-      hash  = std::stol(str_buf.substr(symbol, 8), nullptr, 16);
-      break;
-    }
-    else {
-      //if we did not detected hash we created in beginner file
-      hash = hash_calc(true,false);
-    }
-  };
+  readfile >> str_buf; //read first line <;hash:20982937;>
+  size_t symbol = str_buf.find("<;hash:");//lock for hash mark
+  if(!symbol) {
+    symbol += 7; //--> <;hash:
+    hash  = std::stol(str_buf.substr(symbol, 8), nullptr, 16);
+  }
+  else {
+    //if we did not detected hash we created in beginner file
+    hash = hash_calc(true,false);
+  }
   readfile.close();
   return hash;
 }
@@ -251,18 +230,19 @@ uint32_t WorkWithFile::hash_read_from_file() {
  * false - both hashes does not match
  */
 bool WorkWithFile::check_hash() {
-  //read hash data
-  uint32_t hash_calc_ = hash_calc(false,true);
+  std::cout <<"\nCheck READ HASH"<<"\n";
   //read hash from file
   uint32_t hash_read = hash_read_from_file();
-  std::cout <<std::hex<< hash_calc_<< " : "<<hash_read<<std::dec<<"\n";
+  //read hash data
+  uint32_t hash_calc_ = hash_calc(false,true);
+  std::cout <<std::hex<< hash_calc_<< " : "<<hash_read<<std::dec;
   //compare
   if(hash_calc_ == hash_read) {
-//    std::cout <<std::hex<< "Hash Read Successfully"<<std::dec<<"\n";
+    std::cout <<" Hash Read Successfully"<<"\n";
     return true;
   }
   else {
-//    std::cout <<std::hex<< "Hash Read Error"<<std::dec<<"\n";
+    std::cout <<" Hash Read Error"<<"\n";
     return false;
   }
 }
