@@ -35,7 +35,7 @@ you need to open *main.cpp* and change
  - Can't specify file path via CLI
  - File open handler or exception that will throw an open error (if it cannot be created)
  - When reading a file, the thread loads the processor due to the endless comparison of the file size, a callback is needed that will silently wait for the file to change
- - Interprocessor Synchronization (sockets, pipes, shared memory ...) for writing and reading while using hashing and overwriting a file with a new hash, when a file is written quickly, the read stream reacts instantly and may not wait for the final write of the end of the file, and an overlay occurs in reading
+ - Interprocess Synchronization (sockets, pipes, shared memory ...) for writing and reading
 
 ### Building
  - For build, you need cmake(3.13 or high), LLVM(GCC/CLANG with support c++17).
