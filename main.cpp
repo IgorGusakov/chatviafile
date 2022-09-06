@@ -8,7 +8,7 @@
 
 int main(int argc, char *argv[]) {
   //name file
-  std::string name_test_file = "Test.txt";
+  std::string name_test_file = "Testing.txt";
   //max size file
   uint64_t max_size_file = 5'000'000;
   //-r -w -rw
@@ -25,12 +25,12 @@ int main(int argc, char *argv[]) {
         flag_open = portig_file::READ;
         std::cout << " - turn on option only read file\n";
       }
-      //write only
+        //write only
       else if(option == "-w") {    //!<parser  argument -w
         flag_open = portig_file::WRITE;
         std::cout << " - turn on option only write file\n";
       }
-      //read and write only
+        //read and write only
       else if(option == "-rw") {  //!<parser  argument -rw
         flag_open = portig_file::READ_WRITE;
         std::cout << " - turn on option read and write file\n";
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
       break;
     }
     case portig_file::READ_WRITE: {
-      std::thread in_file (&WorkWithFile::StartHandlerReader, &file);
+      std::thread in_file(&WorkWithFile::StartHandlerReader, &file);
       in_file.detach();
       file.StartHandlerWriter();
       break;
