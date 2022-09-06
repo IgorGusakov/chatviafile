@@ -97,7 +97,7 @@ Description</h2>
 </li>
 </ul>
 <p >If you want to change the location of a file, its name or maximum file size, you need to open <em><a class="el" href="main_8cpp.html">main.cpp</a></em> and change </p><div class="fragment"><div class="line">//name file</div>
-<div class="line">std::string name_test_file = &quot;Test.txt&quot;;</div>
+<div class="line">std::string name_test_file = &quot;Testing.txt&quot;;</div>
 <div class="line">//max size file</div>
 <div class="line">uint64_t max_size_file = 5&#39;000&#39;000;</div>
 </div><!-- fragment --> <h3><a class="anchor" id="autotoc_md3"></a>
@@ -106,7 +106,7 @@ Flaws</h3>
 <li>Can't specify file path via CLI</li>
 <li>File open handler or exception that will throw an open error (if it cannot be created)</li>
 <li>When reading a file, the thread loads the processor due to the endless comparison of the file size, a callback is needed that will silently wait for the file to change</li>
-<li>Interprocessor Synchronization (sockets, pipes, shared memory ...) for writing and reading while using hashing and overwriting a file with a new hash, when a file is written quickly, the read stream reacts instantly and may not wait for the final write of the end of the file, and an overlay occurs in reading</li>
+<li>Interprocess Synchronization (sockets, pipes, shared memory ...) for writing and reading</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Building</h2>
@@ -115,14 +115,14 @@ Building</h2>
 <li><code>sudo apt install cmake g++</code> Install requirement</li>
 <li><code>mkdir build &amp;&amp; cd build</code> Create folder build</li>
 <li><code>cmake ..</code> run cmake build</li>
-<li><code>make</code> run build</li>
-<li><code>ctest</code> run unit tests</li>
-<li><code>./testfile -rw</code> run program(flag run see above)</li>
+<li><code>make -j8</code> run build</li>
+<li><code>ctest --extra-verbose</code> run unit tests</li>
+<li><code>./testfile -rw -crc</code> run program(flag run see above)</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md5"></a>
 Detailed code documentation</h2>
 <ul>
-<li>For detail read code generate doxygen we can run <code>docs/html/index.html</code> </li>
+<li>For detail read code generate doxygen we can run <code>./doc/html/index.html</code> </li>
 </ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['workwithfile_0',['WorkWithFile',['../class_work_with_file.html',1,'']]]
+  ['impl_0',['impl',['../class_work_with_file_1_1impl.html',1,'WorkWithFile']]]
 ];

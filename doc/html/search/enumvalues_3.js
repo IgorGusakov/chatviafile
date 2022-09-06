@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['read_0',['READ',['../_work_with_file_8h.html#af05aa23fc8774a543a5d688abd18f8a6a3466fab4975481651940ed328aa990e4',1,'WorkWithFile.h']]],
-  ['read_5fwrite_1',['READ_WRITE',['../_work_with_file_8h.html#af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144',1,'WorkWithFile.h']]]
+  ['start_5fhandler_0',['START_HANDLER',['../_work_with_file_8h.html#a5ed0172019dfa72bf69d881d3f06688dad1e0b6a1cdca1e135fac89065e719008',1,'WorkWithFile.h']]],
+  ['stop_5ferr_5fhandler_1',['STOP_ERR_HANDLER',['../_work_with_file_8h.html#a5ed0172019dfa72bf69d881d3f06688da143e0d3bb1149c543730e42cb9b8b812',1,'WorkWithFile.h']]],
+  ['stop_5fok_5fhandler_2',['STOP_OK_HANDLER',['../_work_with_file_8h.html#a5ed0172019dfa72bf69d881d3f06688da0b11a76202ad46f0e2e71a5825ea365c',1,'WorkWithFile.h']]]
 ];

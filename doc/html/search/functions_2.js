@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['starthandlerreader_0',['StartHandlerReader',['../class_work_with_file.html#af2c8c975add0419a07af653c80508aaa',1,'WorkWithFile']]],
-  ['starthandlerwriter_1',['StartHandlerWriter',['../class_work_with_file.html#ac3884159176a63fa37353d07a1db4d78',1,'WorkWithFile']]]
+  ['hash_5fread_5ffrom_5ffile_0',['hash_read_from_file',['../class_work_with_file_1_1impl.html#af453b4989b238244cbf3faf697002015',1,'WorkWithFile::impl::hash_read_from_file()'],['../class_work_with_file.html#a86cf9cca59c55e21142da278db9f9673',1,'WorkWithFile::hash_read_from_file()']]]
 ];

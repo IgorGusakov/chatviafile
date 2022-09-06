@@ -7,6 +7,8 @@
 {\ttfamily \#include $<$utility$>$}\newline
 {\ttfamily \#include $<$chrono$>$}\newline
 {\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$experimental/propagate\+\_\+const$>$}\newline
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -23,8 +25,13 @@ enum class \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6
 \begin{DoxyCompactList}\small\item\em enum class to define file operation \end{DoxyCompactList}\item 
 enum class \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\+\_\+file}} \{ \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa1721dbaf18db104f1722faf9f589dbd0}{OPEN\+\_\+\+ERR}}
 , \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa8a568498bd65cd8dd2790c69a1c91dbc}{OPEN\+\_\+\+SUCCESS}}
-, \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa9488f304bb60fd0a160f1210c0ef149e}{HASH\+\_\+\+ERR}}
-, \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779faf7e0d0b2e511f354279d96a001b5af82}{HASH\+\_\+\+OK}}
+, \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa2193d921913c02d87699bdd00d77fc0d}{OPEN\+\_\+\+HASH\+\_\+\+ERR}}
+, \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779facbed805c64f0d0d7e64e5c0dd398ece0}{OPEN\+\_\+\+HASH\+\_\+\+OK}}
+ \}
+\begin{DoxyCompactList}\small\item\em enum class to state about open file \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688d}{write\+\_\+state}} \{ \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688dad1e0b6a1cdca1e135fac89065e719008}{START\+\_\+\+HANDLER}}
+, \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688da0b11a76202ad46f0e2e71a5825ea365c}{STOP\+\_\+\+OK\+\_\+\+HANDLER}}
+, \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688da143e0d3bb1149c543730e42cb9b8b812}{STOP\+\_\+\+ERR\+\_\+\+HANDLER}}
  \}
 \begin{DoxyCompactList}\small\item\em enum class to state about open file \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -49,12 +56,12 @@ OPEN\+\_\+\+ERR&\\
 OPEN\+\_\+\+SUCCESS&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{HASH\_ERR@{HASH\_ERR}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!HASH\_ERR@{HASH\_ERR}}}\mbox{\Hypertarget{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa9488f304bb60fd0a160f1210c0ef149e}\label{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa9488f304bb60fd0a160f1210c0ef149e}} 
-HASH\+\_\+\+ERR&\\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPEN\_HASH\_ERR@{OPEN\_HASH\_ERR}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!OPEN\_HASH\_ERR@{OPEN\_HASH\_ERR}}}\mbox{\Hypertarget{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa2193d921913c02d87699bdd00d77fc0d}\label{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa2193d921913c02d87699bdd00d77fc0d}} 
+OPEN\+\_\+\+HASH\+\_\+\+ERR&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{HASH\_OK@{HASH\_OK}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!HASH\_OK@{HASH\_OK}}}\mbox{\Hypertarget{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779faf7e0d0b2e511f354279d96a001b5af82}\label{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779faf7e0d0b2e511f354279d96a001b5af82}} 
-HASH\+\_\+\+OK&\\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPEN\_HASH\_OK@{OPEN\_HASH\_OK}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!OPEN\_HASH\_OK@{OPEN\_HASH\_OK}}}\mbox{\Hypertarget{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779facbed805c64f0d0d7e64e5c0dd398ece0}\label{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779facbed805c64f0d0d7e64e5c0dd398ece0}} 
+OPEN\+\_\+\+HASH\+\_\+\+OK&\\
 \hline
 
 \end{DoxyEnumFields}
@@ -83,6 +90,30 @@ WRITE&\\
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{READ\_WRITE@{READ\_WRITE}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!READ\_WRITE@{READ\_WRITE}}}\mbox{\Hypertarget{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144}\label{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144}} 
 READ\+\_\+\+WRITE&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688d}\label{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688d}} 
+\index{WorkWithFile.h@{WorkWithFile.h}!write\_state@{write\_state}}
+\index{write\_state@{write\_state}!WorkWithFile.h@{WorkWithFile.h}}
+\doxysubsubsection{\texorpdfstring{write\_state}{write\_state}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688d}{write\+\_\+state}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+enum class to state about open file 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{START\_HANDLER@{START\_HANDLER}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!START\_HANDLER@{START\_HANDLER}}}\mbox{\Hypertarget{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688dad1e0b6a1cdca1e135fac89065e719008}\label{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688dad1e0b6a1cdca1e135fac89065e719008}} 
+START\+\_\+\+HANDLER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STOP\_OK\_HANDLER@{STOP\_OK\_HANDLER}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!STOP\_OK\_HANDLER@{STOP\_OK\_HANDLER}}}\mbox{\Hypertarget{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688da0b11a76202ad46f0e2e71a5825ea365c}\label{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688da0b11a76202ad46f0e2e71a5825ea365c}} 
+STOP\+\_\+\+OK\+\_\+\+HANDLER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STOP\_ERR\_HANDLER@{STOP\_ERR\_HANDLER}!WorkWithFile.h@{WorkWithFile.h}}\index{WorkWithFile.h@{WorkWithFile.h}!STOP\_ERR\_HANDLER@{STOP\_ERR\_HANDLER}}}\mbox{\Hypertarget{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688da143e0d3bb1149c543730e42cb9b8b812}\label{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688da143e0d3bb1149c543730e42cb9b8b812}} 
+STOP\+\_\+\+ERR\+\_\+\+HANDLER&\\
 \hline
 
 \end{DoxyEnumFields}

@@ -82,6 +82,8 @@ $(function() {
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;chrono&gt;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;experimental/propagate_const&gt;</code><br />
 </div>
 <p><a href="_work_with_file_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -101,11 +103,17 @@ Enumerations</h2></td></tr>
 <tr class="separator:af05aa23fc8774a543a5d688abd18f8a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2f55816a31b4353973d92ee801a779f"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_work_with_file_8h.html#aa2f55816a31b4353973d92ee801a779f">open_file</a> { <a class="el" href="_work_with_file_8h.html#aa2f55816a31b4353973d92ee801a779fa1721dbaf18db104f1722faf9f589dbd0">OPEN_ERR</a>
 , <a class="el" href="_work_with_file_8h.html#aa2f55816a31b4353973d92ee801a779fa8a568498bd65cd8dd2790c69a1c91dbc">OPEN_SUCCESS</a>
-, <a class="el" href="_work_with_file_8h.html#aa2f55816a31b4353973d92ee801a779fa9488f304bb60fd0a160f1210c0ef149e">HASH_ERR</a>
-, <a class="el" href="_work_with_file_8h.html#aa2f55816a31b4353973d92ee801a779faf7e0d0b2e511f354279d96a001b5af82">HASH_OK</a>
+, <a class="el" href="_work_with_file_8h.html#aa2f55816a31b4353973d92ee801a779fa2193d921913c02d87699bdd00d77fc0d">OPEN_HASH_ERR</a>
+, <a class="el" href="_work_with_file_8h.html#aa2f55816a31b4353973d92ee801a779facbed805c64f0d0d7e64e5c0dd398ece0">OPEN_HASH_OK</a>
  }</td></tr>
 <tr class="memdesc:aa2f55816a31b4353973d92ee801a779f"><td class="mdescLeft">&#160;</td><td class="mdescRight">enum class to state about open file  <a href="_work_with_file_8h.html#aa2f55816a31b4353973d92ee801a779f">More...</a><br /></td></tr>
 <tr class="separator:aa2f55816a31b4353973d92ee801a779f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ed0172019dfa72bf69d881d3f06688d"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_work_with_file_8h.html#a5ed0172019dfa72bf69d881d3f06688d">write_state</a> { <a class="el" href="_work_with_file_8h.html#a5ed0172019dfa72bf69d881d3f06688dad1e0b6a1cdca1e135fac89065e719008">START_HANDLER</a>
+, <a class="el" href="_work_with_file_8h.html#a5ed0172019dfa72bf69d881d3f06688da0b11a76202ad46f0e2e71a5825ea365c">STOP_OK_HANDLER</a>
+, <a class="el" href="_work_with_file_8h.html#a5ed0172019dfa72bf69d881d3f06688da143e0d3bb1149c543730e42cb9b8b812">STOP_ERR_HANDLER</a>
+ }</td></tr>
+<tr class="memdesc:a5ed0172019dfa72bf69d881d3f06688d"><td class="mdescLeft">&#160;</td><td class="mdescRight">enum class to state about open file  <a href="_work_with_file_8h.html#a5ed0172019dfa72bf69d881d3f06688d">More...</a><br /></td></tr>
+<tr class="separator:a5ed0172019dfa72bf69d881d3f06688d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="aa2f55816a31b4353973d92ee801a779f" name="aa2f55816a31b4353973d92ee801a779f"></a>
@@ -132,8 +140,8 @@ Enumerations</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa2f55816a31b4353973d92ee801a779fa1721dbaf18db104f1722faf9f589dbd0" name="aa2f55816a31b4353973d92ee801a779fa1721dbaf18db104f1722faf9f589dbd0"></a>OPEN_ERR&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aa2f55816a31b4353973d92ee801a779fa8a568498bd65cd8dd2790c69a1c91dbc" name="aa2f55816a31b4353973d92ee801a779fa8a568498bd65cd8dd2790c69a1c91dbc"></a>OPEN_SUCCESS&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa2f55816a31b4353973d92ee801a779fa9488f304bb60fd0a160f1210c0ef149e" name="aa2f55816a31b4353973d92ee801a779fa9488f304bb60fd0a160f1210c0ef149e"></a>HASH_ERR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa2f55816a31b4353973d92ee801a779faf7e0d0b2e511f354279d96a001b5af82" name="aa2f55816a31b4353973d92ee801a779faf7e0d0b2e511f354279d96a001b5af82"></a>HASH_OK&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa2f55816a31b4353973d92ee801a779fa2193d921913c02d87699bdd00d77fc0d" name="aa2f55816a31b4353973d92ee801a779fa2193d921913c02d87699bdd00d77fc0d"></a>OPEN_HASH_ERR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa2f55816a31b4353973d92ee801a779facbed805c64f0d0d7e64e5c0dd398ece0" name="aa2f55816a31b4353973d92ee801a779facbed805c64f0d0d7e64e5c0dd398ece0"></a>OPEN_HASH_OK&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -164,6 +172,35 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="af05aa23fc8774a543a5d688abd18f8a6a3466fab4975481651940ed328aa990e4" name="af05aa23fc8774a543a5d688abd18f8a6a3466fab4975481651940ed328aa990e4"></a>READ&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="af05aa23fc8774a543a5d688abd18f8a6ad4b9e47f65b6e79b010582f15785867e" name="af05aa23fc8774a543a5d688abd18f8a6ad4b9e47f65b6e79b010582f15785867e"></a>WRITE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144" name="af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144"></a>READ_WRITE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a5ed0172019dfa72bf69d881d3f06688d" name="a5ed0172019dfa72bf69d881d3f06688d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ed0172019dfa72bf69d881d3f06688d">&#9670;&#160;</a></span>write_state</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="_work_with_file_8h.html#a5ed0172019dfa72bf69d881d3f06688d">write_state</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>enum class to state about open file </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5ed0172019dfa72bf69d881d3f06688dad1e0b6a1cdca1e135fac89065e719008" name="a5ed0172019dfa72bf69d881d3f06688dad1e0b6a1cdca1e135fac89065e719008"></a>START_HANDLER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a5ed0172019dfa72bf69d881d3f06688da0b11a76202ad46f0e2e71a5825ea365c" name="a5ed0172019dfa72bf69d881d3f06688da0b11a76202ad46f0e2e71a5825ea365c"></a>STOP_OK_HANDLER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a5ed0172019dfa72bf69d881d3f06688da143e0d3bb1149c543730e42cb9b8b812" name="a5ed0172019dfa72bf69d881d3f06688da143e0d3bb1149c543730e42cb9b8b812"></a>STOP_ERR_HANDLER&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>

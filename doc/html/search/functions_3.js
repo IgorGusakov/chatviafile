@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['workwithfile_0',['WorkWithFile',['../class_work_with_file.html#a6a2481b2fec833b972b1db596b93e7cf',1,'WorkWithFile']]]
+  ['impl_0',['impl',['../class_work_with_file_1_1impl.html#a63cb1fa11466d823ee375f1d090c74dc',1,'WorkWithFile::impl']]]
 ];

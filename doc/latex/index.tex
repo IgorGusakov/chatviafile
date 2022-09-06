@@ -27,7 +27,7 @@ This program works with a file that must be located inside the directory of the 
 If you want to change the location of a file, its name or maximum file size, you need to open {\itshape \mbox{\hyperlink{main_8cpp}{main.\+cpp}}} and change 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{//name file}
-\DoxyCodeLine{std::string name\_test\_file = "{}Test.txt"{};}
+\DoxyCodeLine{std::string name\_test\_file = "{}Testing.txt"{};}
 \DoxyCodeLine{//max size file}
 \DoxyCodeLine{uint64\_t max\_size\_file = 5'000'000;}
 
@@ -38,7 +38,7 @@ If you want to change the location of a file, its name or maximum file size, you
 \item Can\textquotesingle{}t specify file path via CLI
 \item File open handler or exception that will throw an open error (if it cannot be created)
 \item When reading a file, the thread loads the processor due to the endless comparison of the file size, a callback is needed that will silently wait for the file to change
-\item Interprocessor Synchronization (sockets, pipes, shared memory ...) for writing and reading while using hashing and overwriting a file with a new hash, when a file is written quickly, the read stream reacts instantly and may not wait for the final write of the end of the file, and an overlay occurs in reading
+\item Interprocess Synchronization (sockets, pipes, shared memory ...) for writing and reading
 \end{DoxyItemize}\hypertarget{index_autotoc_md4}{}\doxysubsection{Building}\label{index_autotoc_md4}
 
 \begin{DoxyItemize}
@@ -46,11 +46,11 @@ If you want to change the location of a file, its name or maximum file size, you
 \item {\ttfamily sudo apt install cmake g++} Install requirement
 \item {\ttfamily mkdir build \&\& cd build} Create folder build
 \item {\ttfamily cmake ..} run cmake build
-\item {\ttfamily make} run build
-\item {\ttfamily ctest} run unit tests
-\item {\ttfamily ./testfile -\/rw} run program(flag run see above)
+\item {\ttfamily make -\/j8} run build
+\item {\ttfamily ctest -\/-\/extra-\/verbose} run unit tests
+\item {\ttfamily ./testfile -\/rw -\/crc} run program(flag run see above)
 \end{DoxyItemize}\hypertarget{index_autotoc_md5}{}\doxysubsection{Detailed code documentation}\label{index_autotoc_md5}
 
 \begin{DoxyItemize}
-\item For detail read code generate doxygen we can run {\ttfamily docs/html/index.\+html} 
+\item For detail read code generate doxygen we can run {\ttfamily ./doc/html/index.html} 
 \end{DoxyItemize}

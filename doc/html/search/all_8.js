@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['workwithfile_0',['WorkWithFile',['../class_work_with_file.html',1,'WorkWithFile'],['../class_work_with_file.html#a6a2481b2fec833b972b1db596b93e7cf',1,'WorkWithFile::WorkWithFile()']]],
-  ['workwithfile_2ecpp_1',['WorkWithFile.cpp',['../_work_with_file_8cpp.html',1,'']]],
-  ['workwithfile_2eh_2',['WorkWithFile.h',['../_work_with_file_8h.html',1,'']]],
-  ['write_3',['WRITE',['../_work_with_file_8h.html#af05aa23fc8774a543a5d688abd18f8a6ad4b9e47f65b6e79b010582f15785867e',1,'WorkWithFile.h']]]
+  ['read_0',['READ',['../_work_with_file_8h.html#af05aa23fc8774a543a5d688abd18f8a6a3466fab4975481651940ed328aa990e4',1,'WorkWithFile.h']]],
+  ['read_5fwrite_1',['READ_WRITE',['../_work_with_file_8h.html#af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144',1,'WorkWithFile.h']]],
+  ['readme_2emd_2',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]]
 ];

@@ -4,27 +4,54 @@
 
 {\ttfamily \#include $<$Work\+With\+File.\+h$>$}
 
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_work_with_file_1_1impl}{impl}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_work_with_file_a6a2481b2fec833b972b1db596b93e7cf}{Work\+With\+File}} (std\+::string name\+\_\+file=\char`\"{}Test.\+txt\char`\"{}, uint64\+\_\+t max\+\_\+file\+\_\+size\+\_\+=5 \textquotesingle{}000 \textquotesingle{}000, bool hash=false)
+\mbox{\hyperlink{class_work_with_file_aa1b5a1140a50d635983af9f1ac7400f2}{Work\+With\+File}} ()
+\item 
+\mbox{\hyperlink{class_work_with_file_abfd73a6d808ff9161f8b18c96f454c4b}{Work\+With\+File}} (const std\+::string \&name\+\_\+file, uint64\+\_\+t max\+\_\+file\+\_\+size\+\_\+, bool hash)
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_work_with_file_a697f8b712aa59199e081f8294eeb2cd9}{$\sim$\+Work\+With\+File}} ()
 \item 
+\mbox{\hyperlink{class_work_with_file_a2144f7e6e2f4d62efb7080ee2a4b8858}{Work\+With\+File}} (\mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \&\&) noexcept
+\item 
+\mbox{\hyperlink{class_work_with_file_a3f37e3daa097720bd9ab8420cab71dc5}{Work\+With\+File}} (const \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \&)=delete
+\item 
+\mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \& \mbox{\hyperlink{class_work_with_file_a50c08eb6256597fb8c31d6dbe0feefff}{operator=}} (\mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \&\&) noexcept
+\item 
+\mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \& \mbox{\hyperlink{class_work_with_file_a4ce08a87fb50e22232c9d71204feafc5}{operator=}} (const \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \&)=delete
+\item 
 \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\+\_\+file}} \mbox{\hyperlink{class_work_with_file_a636f93140cd0f29f32e1d3545b6f8053}{Open\+File}} ()
-\begin{DoxyCompactList}\small\item\em Determine if the three lengths provided could form a valid Triangle object. \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{class_work_with_file_af2c8c975add0419a07af653c80508aaa}{Start\+Handler\+Reader}} ()
-\begin{DoxyCompactList}\small\item\em Handler for reading the file when its size is changed. If the new read size differs from the previous one, then a new stream is opened with the new data and reads the latest data. It also has a flag for calculating the hash, when the flag is enabled, after changing the file size, the data hash is checked and success or error hash is output to the console. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_work_with_file_ac3884159176a63fa37353d07a1db4d78}{Start\+Handler\+Writer}} ()
-\begin{DoxyCompactList}\small\item\em Handler for writing to a file, if the -\/crc file is disabled, then the data is written line by line to the end, if the crc flag is enabled, then the hash is calculated along with the input data from the stream and written at the beginning of the file, thereby overwriting the entire file The handler does not load the processor, as it expects from the stream through getline, the output for the handler will be the threshold file size that can be set through the object constructor, you can also set the file name through the constructor and hash calculation control. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688d}{write\+\_\+state}} \mbox{\hyperlink{class_work_with_file_a2cde4a401aca4e37c6f6d431a6110375}{Start\+Handler\+Writer}} ()
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_work_with_file_a86cf9cca59c55e21142da278db9f9673}{hash\+\_\+read\+\_\+from\+\_\+file}} ()
+\item 
+bool \mbox{\hyperlink{class_work_with_file_a52c460c1104073fce08a3207338a364b}{check\+\_\+hash}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_work_with_file_a13730efc6aa2c8fe5edd0f00cfd10391}{get\+\_\+input\+\_\+buf}} ()
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_work_with_file_a6a2481b2fec833b972b1db596b93e7cf}\label{class_work_with_file_a6a2481b2fec833b972b1db596b93e7cf}} 
+\mbox{\Hypertarget{class_work_with_file_aa1b5a1140a50d635983af9f1ac7400f2}\label{class_work_with_file_aa1b5a1140a50d635983af9f1ac7400f2}} 
 \index{WorkWithFile@{WorkWithFile}!WorkWithFile@{WorkWithFile}}
 \index{WorkWithFile@{WorkWithFile}!WorkWithFile@{WorkWithFile}}
-\doxysubsubsection{\texorpdfstring{WorkWithFile()}{WorkWithFile()}}
-{\footnotesize\ttfamily Work\+With\+File\+::\+Work\+With\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{name\+\_\+file = {\ttfamily \char`\"{}Test.txt\char`\"{}},  }\item[{uint64\+\_\+t}]{max\+\_\+file\+\_\+size\+\_\+ = {\ttfamily 5\textquotesingle{}000\textquotesingle{}000},  }\item[{bool}]{hash = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+\doxysubsubsection{\texorpdfstring{WorkWithFile()}{WorkWithFile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Work\+With\+File\+::\+Work\+With\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_work_with_file_abfd73a6d808ff9161f8b18c96f454c4b}\label{class_work_with_file_abfd73a6d808ff9161f8b18c96f454c4b}} 
+\index{WorkWithFile@{WorkWithFile}!WorkWithFile@{WorkWithFile}}
+\index{WorkWithFile@{WorkWithFile}!WorkWithFile@{WorkWithFile}}
+\doxysubsubsection{\texorpdfstring{WorkWithFile()}{WorkWithFile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Work\+With\+File\+::\+Work\+With\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name\+\_\+file,  }\item[{uint64\+\_\+t}]{max\+\_\+file\+\_\+size\+\_\+,  }\item[{bool}]{hash }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
 
@@ -43,20 +70,58 @@ Create a new \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} object wi
 \index{WorkWithFile@{WorkWithFile}!````~WorkWithFile@{$\sim$WorkWithFile}}
 \index{````~WorkWithFile@{$\sim$WorkWithFile}!WorkWithFile@{WorkWithFile}}
 \doxysubsubsection{\texorpdfstring{$\sim$WorkWithFile()}{~WorkWithFile()}}
-{\footnotesize\ttfamily Work\+With\+File\+::$\sim$\+Work\+With\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Work\+With\+File\+::$\sim$\+Work\+With\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_work_with_file_a2144f7e6e2f4d62efb7080ee2a4b8858}\label{class_work_with_file_a2144f7e6e2f4d62efb7080ee2a4b8858}} 
+\index{WorkWithFile@{WorkWithFile}!WorkWithFile@{WorkWithFile}}
+\index{WorkWithFile@{WorkWithFile}!WorkWithFile@{WorkWithFile}}
+\doxysubsubsection{\texorpdfstring{WorkWithFile()}{WorkWithFile()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Work\+With\+File\+::\+Work\+With\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\mbox{\Hypertarget{class_work_with_file_a3f37e3daa097720bd9ab8420cab71dc5}\label{class_work_with_file_a3f37e3daa097720bd9ab8420cab71dc5}} 
+\index{WorkWithFile@{WorkWithFile}!WorkWithFile@{WorkWithFile}}
+\index{WorkWithFile@{WorkWithFile}!WorkWithFile@{WorkWithFile}}
+\doxysubsubsection{\texorpdfstring{WorkWithFile()}{WorkWithFile()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Work\+With\+File\+::\+Work\+With\+File (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_work_with_file_a52c460c1104073fce08a3207338a364b}\label{class_work_with_file_a52c460c1104073fce08a3207338a364b}} 
+\index{WorkWithFile@{WorkWithFile}!check\_hash@{check\_hash}}
+\index{check\_hash@{check\_hash}!WorkWithFile@{WorkWithFile}}
+\doxysubsubsection{\texorpdfstring{check\_hash()}{check\_hash()}}
+{\footnotesize\ttfamily bool Work\+With\+File\+::check\+\_\+hash (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_work_with_file_a13730efc6aa2c8fe5edd0f00cfd10391}\label{class_work_with_file_a13730efc6aa2c8fe5edd0f00cfd10391}} 
+\index{WorkWithFile@{WorkWithFile}!get\_input\_buf@{get\_input\_buf}}
+\index{get\_input\_buf@{get\_input\_buf}!WorkWithFile@{WorkWithFile}}
+\doxysubsubsection{\texorpdfstring{get\_input\_buf()}{get\_input\_buf()}}
+{\footnotesize\ttfamily std\+::string Work\+With\+File\+::get\+\_\+input\+\_\+buf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_work_with_file_a86cf9cca59c55e21142da278db9f9673}\label{class_work_with_file_a86cf9cca59c55e21142da278db9f9673}} 
+\index{WorkWithFile@{WorkWithFile}!hash\_read\_from\_file@{hash\_read\_from\_file}}
+\index{hash\_read\_from\_file@{hash\_read\_from\_file}!WorkWithFile@{WorkWithFile}}
+\doxysubsubsection{\texorpdfstring{hash\_read\_from\_file()}{hash\_read\_from\_file()}}
+{\footnotesize\ttfamily uint32\+\_\+t Work\+With\+File\+::hash\+\_\+read\+\_\+from\+\_\+file (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{class_work_with_file_a636f93140cd0f29f32e1d3545b6f8053}\label{class_work_with_file_a636f93140cd0f29f32e1d3545b6f8053}} 
 \index{WorkWithFile@{WorkWithFile}!OpenFile@{OpenFile}}
 \index{OpenFile@{OpenFile}!WorkWithFile@{WorkWithFile}}
 \doxysubsubsection{\texorpdfstring{OpenFile()}{OpenFile()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\+\_\+file}} Work\+With\+File\+::\+Open\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+\mbox{\Hypertarget{class_work_with_file_a4ce08a87fb50e22232c9d71204feafc5}\label{class_work_with_file_a4ce08a87fb50e22232c9d71204feafc5}} 
+\index{WorkWithFile@{WorkWithFile}!operator=@{operator=}}
+\index{operator=@{operator=}!WorkWithFile@{WorkWithFile}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \& Work\+With\+File\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
-
-Determine if the three lengths provided could form a valid Triangle object. 
+\mbox{\Hypertarget{class_work_with_file_a50c08eb6256597fb8c31d6dbe0feefff}\label{class_work_with_file_a50c08eb6256597fb8c31d6dbe0feefff}} 
+\index{WorkWithFile@{WorkWithFile}!operator=@{operator=}}
+\index{operator=@{operator=}!WorkWithFile@{WorkWithFile}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \& Work\+With\+File\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
 
 \mbox{\Hypertarget{class_work_with_file_af2c8c975add0419a07af653c80508aaa}\label{class_work_with_file_af2c8c975add0419a07af653c80508aaa}} 
 \index{WorkWithFile@{WorkWithFile}!StartHandlerReader@{StartHandlerReader}}
@@ -64,30 +129,11 @@ Determine if the three lengths provided could form a valid Triangle object.
 \doxysubsubsection{\texorpdfstring{StartHandlerReader()}{StartHandlerReader()}}
 {\footnotesize\ttfamily void Work\+With\+File\+::\+Start\+Handler\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-
-
-Handler for reading the file when its size is changed. If the new read size differs from the previous one, then a new stream is opened with the new data and reads the latest data. It also has a flag for calculating the hash, when the flag is enabled, after changing the file size, the data hash is checked and success or error hash is output to the console. 
-
-This method requires a refactoring for the following reasons \begin{DoxyWarning}{Warning}
-1. infinite loop checking file size is CPU intensive, need file change callback to silently report it 
-
-2. if\+\_\+strm.\+clear() should update the stream this allowed std\+::filesystem\+::file\+\_\+size to use if\+\_\+strm.\+tellg() 
-
-3. perhaps synchronization via sockets or shared mem is needed to work with hash, since overwriting a large file may take longer and an intermediate file change during writing may give a false file change 
-\end{DoxyWarning}
-todo\+: it will provide to detected was changed file and create callback in future, maybe -\/\texorpdfstring{$>$}{>}
-
-Fixme\+: this While(true) is overload work processor
-
-todo\+: did not work if\+\_\+strm.\+clear();???\mbox{\Hypertarget{class_work_with_file_ac3884159176a63fa37353d07a1db4d78}\label{class_work_with_file_ac3884159176a63fa37353d07a1db4d78}} 
+\mbox{\Hypertarget{class_work_with_file_a2cde4a401aca4e37c6f6d431a6110375}\label{class_work_with_file_a2cde4a401aca4e37c6f6d431a6110375}} 
 \index{WorkWithFile@{WorkWithFile}!StartHandlerWriter@{StartHandlerWriter}}
 \index{StartHandlerWriter@{StartHandlerWriter}!WorkWithFile@{WorkWithFile}}
 \doxysubsubsection{\texorpdfstring{StartHandlerWriter()}{StartHandlerWriter()}}
-{\footnotesize\ttfamily void Work\+With\+File\+::\+Start\+Handler\+Writer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Handler for writing to a file, if the -\/crc file is disabled, then the data is written line by line to the end, if the crc flag is enabled, then the hash is calculated along with the input data from the stream and written at the beginning of the file, thereby overwriting the entire file The handler does not load the processor, as it expects from the stream through getline, the output for the handler will be the threshold file size that can be set through the object constructor, you can also set the file name through the constructor and hash calculation control. 
+{\footnotesize\ttfamily \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688d}{write\+\_\+state}} Work\+With\+File\+::\+Start\+Handler\+Writer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
