@@ -163,7 +163,8 @@ TEST(UnitTest, CheckAddHash)
                            "since Ritchie and Thompson published their CACM paper. The\n"
                            "process model and the file system model have remained the\n"
                            "same."};
-  uint32_t hash_test = 0xF0746A71; // hash test text above
+  uint32_t hash_test = std::hash<std::string>{}(test_text);// hash test text above
+//  uint32_t hash_test = 0xF0746A71; // hash test text above
   test_file << test_text;
   test_file.flush();
   test_file.close();
@@ -230,11 +231,17 @@ TEST(UnitTest, CheckHash)
   //name file
   std::string name_test_file = "unit_test_check_hash.txt";
   std::ofstream test_file(name_test_file,std::ios::out);
-  std::string test_text = {"<;hash:f0746a71;>\n"
-                           "The UNIX core concepts have remained more-or-less the same\n"
-                           "since Ritchie and Thompson published their CACM paper. The\n"
-                           "process model and the file system model have remained the\n"
-                           "same."};
+  std::string test_text_ = {"The UNIX core concepts have remained more-or-less the same\n"
+                            "since Ritchie and Thompson published their CACM paper. The\n"
+                            "process model and the file system model have remained the\n"
+                            "same."};
+  std::string test_text;
+  uint32_t hash = std::hash<std::string>{}(test_text_);
+
+  std::stringstream hash_str;
+  hash_str <<"<;hash:" <<std::setfill ('0')<<std::setw(8)<<std::hex<< hash <<";>\n";
+  test_text.insert(0,hash_str.str(),0,18);
+  test_text.append(test_text_);
   test_file << test_text;
   test_file.flush();
   //max size file
