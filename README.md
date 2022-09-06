@@ -27,7 +27,7 @@ If you want to change the location of a file, its name or maximum file size,
 you need to open *main.cpp* and change
 ```   
   //name file
-  std::string name_test_file = "Test.txt";
+  std::string name_test_file = "Testing.txt";
   //max size file
   uint64_t max_size_file = 5'000'000;
 ```
@@ -42,9 +42,9 @@ you need to open *main.cpp* and change
  - ``` sudo apt install cmake g++``` Install requirement
  - ``` mkdir build && cd build ``` Create folder build
  - ``` cmake .. ``` run cmake build
- - ``` make ``` run build
- - ``` ctest ``` run unit tests
- - ``` ./testfile -rw ``` run program(flag run see above)
+ - ``` make -j8 ``` run build
+ - ``` ctest --extra-verbose ``` run unit tests
+ - ``` ./testfile -rw -crc``` run program(flag run see above)
 
 ### Detailed code documentation
 - For detail read code generate doxygen we can run ``` ./doc/html/index.html ```

@@ -269,15 +269,13 @@ TEST(UnitTest, CheckHash)
  * The input istringstream emulates the text cin
  * Output of WorkWithFile::get_input_buf() last line read from buffer
  * For readability, the file size is set to 500 bytes,
- * this will allow you to write the test string 3 times
+ * this will allow you to write the test string 7 times
  * At the end, the output is compared with the test input.
  */
 TEST(IntegrationTest, CheckSomeWriteReadFile)
 {
 //Arrange
-  std::istringstream iss("Memory Management: Possible increase in memory usage due to more memory "
-                         "allocation than with the default structure which can be critical in "
-                         "embedded software development.");
+  std::istringstream iss("Memory Management: Possible increase in memory usage due to more memory ");
   std::cin.rdbuf(iss.rdbuf());  // iss -> cin(mock)
 
   std::string name_test_file = "unit_test_rw_file.txt";
@@ -297,10 +295,12 @@ TEST(IntegrationTest, CheckSomeWriteReadFile)
     str = unit_test_wr.get_input_buf();
     mux_r.unlock();
   });
-//Act
   in_file.detach();
-  WorkWithFile unit_test(name_test_file, max_size_file, flag_hash);
+//Act
+  std::cout<<"Start Write Handler"<<"\n";
   std::scoped_lock lock_w(mux_w);
+//  std::this_thread::sleep_for(100ms);
+  WorkWithFile unit_test(name_test_file, max_size_file, flag_hash);
   unit_test.OpenFile();
   unit_test.StartHandlerWriter();
   std::scoped_lock lock_r(mux_r);

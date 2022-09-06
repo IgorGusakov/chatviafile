@@ -134,7 +134,7 @@ class WorkWithFile::impl
 //    std::filesystem::file_time_type ftime = std::filesystem::last_write_time(filename);
 //    std::time_t cftime = to_time_t(ftime);
 //    std::cout<<"change file:"<< cftime;
-      std::cout<<"filename : " <<filename;
+
       auto size_old = std::filesystem::file_size(filename);
       ///Fixme: this While(true) is overload work processor
       while (true) {
