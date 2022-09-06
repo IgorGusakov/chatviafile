@@ -31,6 +31,7 @@ TEST(UnitTest, CheckOpenFileWithHashHundler)
                            "process model and the file system model have remained the\n"
                            "same."};
   test_file << test_text;
+  test_file.flush();
   test_file.close();
   //max size file
   uint64_t max_size_file = 3'000; //size 3kb
@@ -69,6 +70,8 @@ TEST(UnitTest, CheckOpenFileHundler)
 //Assert
   //check return oversize status
   EXPECT_EQ(state_open, open_file::OPEN_SUCCESS);
+  //delete file
+  std::filesystem::remove(name_test_file);
 }
 
 
@@ -98,6 +101,8 @@ TEST(UnitTest, CheckSizeWrite3kFile)
 //Assert
   //check size file
   EXPECT_EQ(std::filesystem::file_size(name_test_file), 3000);
+  //delete file
+  std::filesystem::remove(name_test_file);
 }
 
 
@@ -109,10 +114,17 @@ TEST(UnitTest, CheckSizeWrite3kFile)
 TEST(UnitTest, CheckOpenFileOversize)
 {
 //Arrange
-  //name file
-  std::string name_test_file = "unit_test_write3k.txt";
+//name
+  std::string name_test_file = "unit_test_oversize.txt";
+  std::ofstream test_file(name_test_file,std::ios::out);
+  std::string test_text = {"In our modern world, there are many factors that place the wellbeing of the planet in jeopardy. While some people have the opinion that environmental problems are just a natural occurrence, others believe that human beings have a huge impact on the environment. Regardless of your viewpoint, take into consideration the following factors that place our environment as well as the planet Earth in danger.\n"
+                           "Global warming or climate change is a major contributing factor to environmental damage. Because of global warming, we have seen an increase in melting ice caps, a rise in sea levels, and the formation of new weather patterns. These weather patterns have caused stronger storms, droughts, and flooding in places that they formerly did not occur.\n"
+                           "Air pollution is primarily caused as a result of excessive and unregulated emissions of carbon dioxide into the air. Pollutants mostly emerge from the burning of fossil fuels in addition to chemicals, toxic substances, and improper waste disposal. Air pollutants are absorbed into the atmosphere, and they can cause smog, a combination of smoke and fog, in valleys as well as produce acidic precipitation in areas far away from the pollution source.\n"};
+  test_file << test_text;
+  test_file.flush();
+  test_file.close();
   //max size file
-  uint64_t max_size_file = 3'000; //size 3kb
+  uint64_t max_size_file = 1000; //size 3kb
   bool flag_hash = false;
   //create object
   WorkWithFile unit_test(name_test_file,max_size_file,flag_hash);
@@ -125,7 +137,7 @@ TEST(UnitTest, CheckOpenFileOversize)
   //check return oversize status
   EXPECT_EQ(state, write_state::STOP_OK_HANDLER);
   //delete file
-//  std::filesystem::remove(name_test_file);
+  std::filesystem::remove(name_test_file);
 }
 
 
@@ -146,7 +158,7 @@ TEST(UnitTest, CheckAddHash)
 //Arrange
   //name file
   std::string name_test_file = "unit_test_add_hash.txt";
-  std::ofstream test_file(name_test_file,std::ios::out);
+  std::ofstream test_file(name_test_file, std::ios::out);
   std::string test_text = {"The UNIX core concepts have remained more-or-less the same\n"
                            "since Ritchie and Thompson published their CACM paper. The\n"
                            "process model and the file system model have remained the\n"
@@ -170,7 +182,7 @@ TEST(UnitTest, CheckAddHash)
   //check add to file
   EXPECT_EQ(hash_test, hash_add_to_file);
   //delete file
-//  std::filesystem::remove(name_test_file);
+  std::filesystem::remove(name_test_file);
 }
 
 /*
@@ -191,7 +203,6 @@ TEST(UnitTest, CheckReadHash)
   uint32_t hash_test = 0xF0746A71; // hash test text above
   test_file << test_text;
   test_file.flush();
-  test_file.close();
   //max size file
   uint64_t max_size_file = 3000; //size 100 b
   bool flag_hash = false;
@@ -206,8 +217,9 @@ TEST(UnitTest, CheckReadHash)
 //Assert
   //check read hash
   EXPECT_EQ(hash_test, hash_read_to_file);
+  test_file.close();
   //delete file
-//  std::filesystem::remove(name_test_file);
+  std::filesystem::remove(name_test_file);
 }
 /*
  * After we check private method WorkWithFile::check_hash()
@@ -225,9 +237,8 @@ TEST(UnitTest, CheckHash)
                            "same."};
   test_file << test_text;
   test_file.flush();
-  test_file.close();
   //max size file
-  uint64_t max_size_file = 3000; //size 100 b
+  uint64_t max_size_file = 3000; //size 3000 b
   bool flag_hash = false;
   //create object
   WorkWithFile unit_test(name_test_file,max_size_file,flag_hash);
@@ -239,8 +250,9 @@ TEST(UnitTest, CheckHash)
 
 //Assert
   EXPECT_EQ(true,hash_check);
+  test_file.close();
   //delete file
-//  std::filesystem::remove(name_test_file);
+  std::filesystem::remove(name_test_file);
 }
 
 
@@ -262,7 +274,6 @@ TEST(IntegrationTest, CheckSomeWriteReadFile)
   std::cin.rdbuf(iss.rdbuf());  // iss -> cin(mock)
 
   std::string name_test_file = "unit_test_rw_file.txt";
-
   static std::mutex mux_r;
   static std::mutex mux_w;
   mux_w.lock();
@@ -290,5 +301,5 @@ TEST(IntegrationTest, CheckSomeWriteReadFile)
 //Assert
   EXPECT_EQ(str,iss.str());
   //delete file
-//  std::filesystem::remove(name_test_file);
+  std::filesystem::remove(name_test_file);
 }
