@@ -292,8 +292,8 @@ TEST(IntegrationTest, CheckSomeWriteReadFile)
   });
 //Act
   in_file.detach();
-  std::scoped_lock lock_w(mux_w);
   WorkWithFile unit_test(name_test_file, max_size_file, flag_hash);
+  std::scoped_lock lock_w(mux_w);
   unit_test.OpenFile();
   unit_test.StartHandlerWriter();
   std::scoped_lock lock_r(mux_r);
