@@ -269,13 +269,13 @@ TEST(UnitTest, CheckHash)
  * The input istringstream emulates the text cin
  * Output of WorkWithFile::get_input_buf() last line read from buffer
  * For readability, the file size is set to 500 bytes,
- * this will allow you to write the test string 7 times
+ * this will allow you to write the test string n times
  * At the end, the output is compared with the test input.
  */
 TEST(IntegrationTest, CheckSomeWriteReadFile)
 {
 //Arrange
-  std::istringstream iss("Memory Management: Possible increase in memory usage due to more memory ");
+  std::istringstream iss("Memory Management: Possible increase");
   std::cin.rdbuf(iss.rdbuf());  // iss -> cin(mock)
 
   std::string name_test_file = "unit_test_rw_file.txt";
@@ -283,7 +283,7 @@ TEST(IntegrationTest, CheckSomeWriteReadFile)
   static std::mutex mux_w;
   mux_w.lock();
   //max size file
-  uint64_t max_size_file = 500; //size 500 b
+  uint64_t max_size_file = 3000; //size 3000 b
   bool flag_hash = false;
   std::string str;
   std::thread in_file([&] {
