@@ -13,7 +13,8 @@
 #include <sstream>
 #include <memory>
 #include <experimental/propagate_const>
-
+#include "Poco/DirectoryWatcher.h"
+#include "Poco/Delegate.h"
 
 
 /**
@@ -74,11 +75,12 @@ class WorkWithFile {
   WorkWithFile& operator=(const WorkWithFile&) = delete; //copy =
 
   open_file OpenFile();
-  void StartHandlerReader();
   write_state StartHandlerWriter();
   uint32_t hash_read_from_file();
   bool check_hash();
   std::string get_input_buf();
+
+
 };
 
 #endif //TESTFILE__WORKWITHFILE_H_

@@ -12,11 +12,12 @@ class WorkWithFile::impl
   uint64_t max_file_size; // max file size file
   bool hash_option; // flag on/off hash
   uint32_t size_file; // current size file
+  uint32_t size_read; // current size file
   std::string str_buf_out; // buffer write file
   std::string str_buf_in; // buffer read file
   std::string str_last_message; // last input message
   std::ofstream of_strm; // Stream write file
-
+  Poco::DirectoryWatcher* watcher; //handler changed file
 
   /**
  * @brief private method for calculating the hash of a file,
@@ -103,71 +104,12 @@ class WorkWithFile::impl
     }
 
     size_file = std::filesystem::file_size(filename); // read file size
+    size_read = size_file;
     std::cout << "Current size in open file  " <<std::dec << size_file << " byte \n";
 
     return status;
   }
 
-
-  /**
-  * @brief Handler for reading the file when its size is changed.
-  * If the new read size differs from the previous one, then a new stream
-  * is opened with the new data and reads the latest data.
-  * It also has a flag for calculating the hash, when the flag is enabled,
-  * after changing the file size,
-  * the data hash is checked and success or error hash is output to the console.
-
-
-  * This method requires a refactoring for the following reasons
-  * @warning 1. infinite loop checking file size is CPU intensive,
-  * need file change callback to silently report it, perhaps synchronization via sockets or shared mem
-  * @warning 2. if_strm.clear() should update the stream this allowed
-  * std::filesystem::file_size to use if_strm.tellg()
-  */
-  void StartHandlerReader(WorkWithFile& w)
-  {
-    std::ifstream if_strm(filename, std::ios_base::in);
-    if (if_strm.is_open())
-    {
-      ///todo: it will provide to detected was changed file and create callback in future, maybe ->
-//    uint32_t size = std::filesystem::file_size(filename);
-//    std::filesystem::file_time_type ftime = std::filesystem::last_write_time(filename);
-//    std::time_t cftime = to_time_t(ftime);
-//    std::cout<<"change file:"<< cftime;
-
-      auto size_old = std::filesystem::file_size(filename);
-      ///Fixme: this While(true) is overload work processor
-      while (true) {
-
-        auto size_current = std::filesystem::file_size(filename);
-        if (size_old != size_current && size_current > 0 || size_old >= max_file_size) { //when we full erase file size_current > 0
-          if_strm.close();
-          if(hash_option)
-            w.check_hash();
-          {
-            ///todo: did not work if_strm.clear();???
-            if_strm.open(filename);
-            if_strm.seekg(static_cast<long long>(size_old));
-            uint32_t messages_size = size_current - size_old;
-            size_old = size_current;
-            if (size_old >= max_file_size) {
-              std::cout << "File size more "<<max_file_size<<" byte and Exit" << std::endl;
-              break;
-            }
-            while (getline(if_strm, str_buf_in)) {
-              str_last_message.clear();
-              str_last_message.append(str_buf_in);
-              std::cout << "\nRead new message from file: " << str_last_message << std::endl;
-              std::cout << "Size read new message from file: " << messages_size << " bytes"<< std::endl;
-//            if_strm.clear(); //< Now we can read again if_stream, but...
-            }
-          }
-        }
-      }
-    }
-    else
-      std::cout << "Unable to open if_strm \n";
-  }
 
 
   /**
@@ -195,7 +137,6 @@ class WorkWithFile::impl
           std::cout<<"hash write file changed : " <<std::hex << hash <<"\n";
         }
         else { //just write to the end file
-          //todo: will add check update file
           of_strm << str_buf_out << "\n";
           of_strm.flush();
         }
@@ -271,17 +212,70 @@ class WorkWithFile::impl
     }
   }
 
+/**
+* @brief For test
+*/
   std::string get_input_buf() {
     return str_last_message;
   }
 
+
+/**
+* @brief
+*/
+  void onFileChanged(const Poco::DirectoryWatcher::DirectoryEvent& changeEvent)
+  {
+    auto size_current = std::filesystem::file_size(filename);
+
+    if(changeEvent.event == Poco::DirectoryWatcher::DW_ITEM_MODIFIED &&
+        changeEvent.item.path() == filename) {
+
+      if (size_current >= max_file_size) {
+        std::cout << "File size more " << max_file_size << " byte and Exit" << std::endl;
+        exit(0);
+      }
+
+      std::ifstream if_strm(filename, std::ios_base::in);
+      if (if_strm.is_open()) {
+        if_strm.seekg(static_cast<long long>(size_read));//old read message
+        if (hash_option) {
+//          check_hash();
+        }
+        uint32_t messages_size = size_current - size_read;
+        size_read = size_current;
+        while (getline(if_strm, str_buf_in)) {
+          str_last_message.clear();
+          str_last_message.append(str_buf_in);
+          std::cout << "\nRead new message from file: " << str_last_message << std::endl;
+          std::cout << "Size read new message from file: " << messages_size << " bytes"
+                    << std::endl;
+        }
+      } else
+        std::cout << "Unable to open if_strm \n";
+    }
+  }
+
+
+/**
+* @brief Constructor
+*/
   impl(std::string name_file, uint64_t max_file_size_ , bool hash) :
-      filename(std::move(name_file)), max_file_size(max_file_size_), hash_option(hash), size_file(0) {}
+      filename(std::move(name_file)),
+      max_file_size(max_file_size_),
+      hash_option(hash),
+      size_file(0) ,
+      size_read(0)
+  {
+    watcher = new Poco::DirectoryWatcher(std::string("../dir"),
+                                         Poco::DirectoryWatcher::DW_ITEM_MODIFIED, //event modified
+                                         1); //1 sec
+    watcher->itemModified += Poco::delegate(this, &impl::onFileChanged);
+  }
 };
 
 
+
 open_file WorkWithFile::OpenFile() { return pImpl->OpenFile(*this); }
-void WorkWithFile::StartHandlerReader() { pImpl->StartHandlerReader(*this); }
 write_state WorkWithFile::StartHandlerWriter() { return pImpl->StartHandlerWriter(*this); }
 uint32_t WorkWithFile::hash_read_from_file() {return pImpl->hash_read_from_file(*this);}
 bool WorkWithFile::check_hash() {return pImpl->check_hash(*this);}
