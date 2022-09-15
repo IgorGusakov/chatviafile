@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  WorkWithFile file(name_test_file, max_size_file, flag_hash);
+  WorkWithFile file(name_test_file, max_size_file, flag_hash, flag_open);
   status_open = file.OpenFile();
 
   switch (flag_open) {
@@ -61,7 +61,6 @@ int main(int argc, char *argv[]) {
     }
 
       return 0;
-      ///todo: 1. Turn off read callback if choose -r
       ///todo: 2. check_hash() in read handler
   }
 }

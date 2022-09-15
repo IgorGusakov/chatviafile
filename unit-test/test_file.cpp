@@ -37,7 +37,7 @@ TEST(UnitTest, CheckOpenFileWithHashHundler)
   uint64_t max_size_file = 3'000; //size 3kb
   bool flag_hash = true;
   //create object
-  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash);
+  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash,portig_file::READ_WRITE);
 
 //Act
   open_file state_open = unit_test.OpenFile();
@@ -62,7 +62,7 @@ TEST(UnitTest, CheckOpenFileHundler)
   uint64_t max_size_file = 3'000; //size 3kb
   bool flag_hash = false;
   //create object
-  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash);
+  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash,portig_file::READ_WRITE);
 
 //Act
   open_file state_open = unit_test.OpenFile();
@@ -92,7 +92,7 @@ TEST(UnitTest, CheckSizeWrite3kFile)
   uint64_t max_size_file = 3'000; //size 3kb
   bool flag_hash = false;
   //create object
-  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash);
+  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash,portig_file::READ_WRITE);
   unit_test.OpenFile();
 
 //Act
@@ -127,7 +127,7 @@ TEST(UnitTest, CheckOpenFileOversize)
   uint64_t max_size_file = 1000; //size 3kb
   bool flag_hash = false;
   //create object
-  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash);
+  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash,portig_file::READ_WRITE);
   unit_test.OpenFile();
 
 //Act
@@ -172,7 +172,7 @@ TEST(UnitTest, CheckAddHash)
   uint64_t max_size_file = 3000; //size 100 b
   bool flag_hash = false;
   //create object
-  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash);
+  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash,portig_file::READ_WRITE);
   unit_test.OpenFile();
 
 //Act
@@ -208,7 +208,7 @@ TEST(UnitTest, CheckReadHash)
   uint64_t max_size_file = 3000; //size 100 b
   bool flag_hash = false;
   //create object
-  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash);
+  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash,portig_file::READ_WRITE);
   unit_test.OpenFile();
 
 //Act
@@ -248,7 +248,7 @@ TEST(UnitTest, CheckHash)
   uint64_t max_size_file = 3000; //size 3000 b
   bool flag_hash = false;
   //create object
-  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash);
+  WorkWithFile unit_test(name_test_file,max_size_file,flag_hash,portig_file::READ_WRITE);
   unit_test.OpenFile();
 
 //Act

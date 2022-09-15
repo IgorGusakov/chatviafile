@@ -259,17 +259,19 @@ class WorkWithFile::impl
 /**
 * @brief Constructor
 */
-  impl(std::string name_file, uint64_t max_file_size_ , bool hash) :
+  impl(std::string name_file, uint64_t max_file_size_ , bool hash, portig_file flag) :
       filename(std::move(name_file)),
       max_file_size(max_file_size_),
       hash_option(hash),
       size_file(0) ,
       size_read(0)
   {
-    watcher = new Poco::DirectoryWatcher(std::string("../dir"),
-                                         Poco::DirectoryWatcher::DW_ITEM_MODIFIED, //event modified
-                                         1); //1 sec
-    watcher->itemModified += Poco::delegate(this, &impl::onFileChanged);
+    if(flag == portig_file::READ ||  flag == portig_file::READ_WRITE) {
+      watcher = new Poco::DirectoryWatcher(std::string("../dir"),
+                                           Poco::DirectoryWatcher::DW_ITEM_MODIFIED, //event modified
+                                           1); //1 sec
+      watcher->itemModified += Poco::delegate(this, &impl::onFileChanged);
+    }
   }
 };
 
@@ -281,8 +283,8 @@ uint32_t WorkWithFile::hash_read_from_file() {return pImpl->hash_read_from_file(
 bool WorkWithFile::check_hash() {return pImpl->check_hash(*this);}
 
 WorkWithFile::WorkWithFile() = default;
-WorkWithFile::WorkWithFile(const std::string& name_file, uint64_t max_file_size_ , bool hash) :
-    pImpl{std::make_unique<impl>(name_file,max_file_size_,hash)} {}
+WorkWithFile::WorkWithFile(const std::string& name_file, uint64_t max_file_size_ , bool hash, portig_file flag) :
+    pImpl{std::make_unique<impl>(name_file,max_file_size_,hash,flag)} {}
 std::string WorkWithFile::get_input_buf() { return pImpl->get_input_buf();};
 [[maybe_unused]] WorkWithFile::WorkWithFile(WorkWithFile&&) noexcept = default;
 WorkWithFile::~WorkWithFile() = default;

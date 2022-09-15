@@ -63,11 +63,15 @@ class WorkWithFile {
 /**
  * Create a new WorkWithFile object with param.
  * @brief Constructor WorkWithFile
- * @param name_file set name file @default std::string "Test.txt"
- * @param max_file_size_ set max file @default uint64_t 5'000'000 bytes
- * @param hash on/off hash to file @default boll false
+ * @param name_file set name file
+ * @param max_file_size_ set max file
+ * @param hash on/off hash to file
+ * @param flag flag open file -r -w -rw
  */
-  explicit WorkWithFile(const std::string& name_file, uint64_t max_file_size_ , bool hash);
+  explicit WorkWithFile(const std::string& name_file,
+                        uint64_t max_file_size_ ,
+                        bool hash,
+                        portig_file flag);
   ~WorkWithFile(); // default des
   [[maybe_unused]] WorkWithFile(WorkWithFile&&) noexcept ; // move
   WorkWithFile(const WorkWithFile&) = delete; // copy
@@ -79,8 +83,6 @@ class WorkWithFile {
   uint32_t hash_read_from_file();
   bool check_hash();
   std::string get_input_buf();
-
-
 };
 
 #endif //TESTFILE__WORKWITHFILE_H_
