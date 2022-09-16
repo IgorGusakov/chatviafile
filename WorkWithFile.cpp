@@ -226,8 +226,6 @@ class WorkWithFile::impl
 */
   void onFileChanged(const Poco::DirectoryWatcher::DirectoryEvent& changeEvent)
   {
-    watcher->suspendEvents();
-    while (!watcher->eventsSuspended());
     if(changeEvent.event == Poco::DirectoryWatcher::DW_ITEM_MODIFIED &&
         changeEvent.item.path() == filename && size_read !=0) {
       auto size_current = std::filesystem::file_size(filename);
@@ -239,8 +237,8 @@ class WorkWithFile::impl
 
       std::ifstream if_strm(filename, std::ios_base::in);
       if (if_strm.is_open()) {
-        std::cout << "\n\n\n!!!!SIZE OLD!!!!: " << size_old << std::endl;
-        std::cout << "!!!!SIZE CURRENT!!!!: " << size_current << std::endl;
+        std::cout << "\n\nSIZE OLD : " << size_old << std::endl;
+        std::cout << "SIZE CURRENT : " << size_current << std::endl;
         if_strm.seekg(static_cast<long long>(size_old));//old read message
         if (hash_option) {
           WorkWithFile w(filename,max_file_size,true,portig_file::READ);
@@ -255,11 +253,10 @@ class WorkWithFile::impl
 //          str_last_message.append(str_buf_in);
           std::cout << "\nRead new message from file: " << str_buf_in << std::endl;
         }
-        std::cout << "Size read new message from file: " << messages_size << " bytes"<< std::endl;
+        std::cout << "Size read new message from file: " << messages_size << " bytes"<<def<< std::endl;
       } else
         std::cout << "Unable to open if_strm \n";
     }
-    watcher->resumeEvents();
   }
 
 
