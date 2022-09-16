@@ -253,7 +253,7 @@ class WorkWithFile::impl
 //          str_last_message.append(str_buf_in);
           std::cout << "\nRead new message from file: " << str_buf_in << std::endl;
         }
-        std::cout << "Size read new message from file: " << messages_size << " bytes"<<def<< std::endl;
+        std::cout << "Size read new message from file: " << messages_size << " bytes"<< std::endl;
       } else
         std::cout << "Unable to open if_strm \n";
     }
