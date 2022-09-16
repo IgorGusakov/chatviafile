@@ -52,6 +52,7 @@ class WorkWithFile::impl
       //added data from cin>>
       if(str_buf_out.length()) {
         str_file.append(str_buf_out);
+        str_file.push_back('\n');
       }
       //calc hash
       hash = std::hash<std::string>{}(str_file);
@@ -225,11 +226,12 @@ class WorkWithFile::impl
 */
   void onFileChanged(const Poco::DirectoryWatcher::DirectoryEvent& changeEvent)
   {
-    auto size_current = std::filesystem::file_size(filename);
-
+    watcher->suspendEvents();
+    while (!watcher->eventsSuspended());
     if(changeEvent.event == Poco::DirectoryWatcher::DW_ITEM_MODIFIED &&
-        changeEvent.item.path() == filename) {
-
+        changeEvent.item.path() == filename && size_read !=0) {
+      auto size_current = std::filesystem::file_size(filename);
+      uint32_t size_old = size_read;
       if (size_current >= max_file_size) {
         std::cout << "File size more " << max_file_size << " byte and Exit" << std::endl;
         exit(0);
@@ -237,27 +239,32 @@ class WorkWithFile::impl
 
       std::ifstream if_strm(filename, std::ios_base::in);
       if (if_strm.is_open()) {
-        if_strm.seekg(static_cast<long long>(size_read));//old read message
+        std::cout << "\n\n\n!!!!SIZE OLD!!!!: " << size_old << std::endl;
+        std::cout << "!!!!SIZE CURRENT!!!!: " << size_current << std::endl;
+        if_strm.seekg(static_cast<long long>(size_old));//old read message
         if (hash_option) {
-//          check_hash();
+          WorkWithFile w(filename,max_file_size,true,portig_file::READ);
+          w.check_hash();
         }
         uint32_t messages_size = size_current - size_read;
-        size_read = size_current;
-        while (getline(if_strm, str_buf_in)) {
-          str_last_message.clear();
-          str_last_message.append(str_buf_in);
-          std::cout << "\nRead new message from file: " << str_last_message << std::endl;
-          std::cout << "Size read new message from file: " << messages_size << " bytes"
-                    << std::endl;
+        if(size_current > size_read) {
+          size_read = size_current;
         }
+        while (getline(if_strm, str_buf_in)) {
+//          str_last_message.clear();
+//          str_last_message.append(str_buf_in);
+          std::cout << "\nRead new message from file: " << str_buf_in << std::endl;
+        }
+        std::cout << "Size read new message from file: " << messages_size << " bytes"<< std::endl;
       } else
         std::cout << "Unable to open if_strm \n";
     }
+    watcher->resumeEvents();
   }
 
 
 /**
-* @brief Constructor
+* @brief Constructor pimpl
 */
   impl(std::string name_file, uint64_t max_file_size_ , bool hash, portig_file flag) :
       filename(std::move(name_file)),
@@ -269,7 +276,7 @@ class WorkWithFile::impl
     if(flag == portig_file::READ ||  flag == portig_file::READ_WRITE) {
       watcher = new Poco::DirectoryWatcher(std::string("../dir"),
                                            Poco::DirectoryWatcher::DW_ITEM_MODIFIED, //event modified
-                                           1); //1 sec
+                                           1); //1 sec interview
       watcher->itemModified += Poco::delegate(this, &impl::onFileChanged);
     }
   }
@@ -279,13 +286,18 @@ class WorkWithFile::impl
 
 open_file WorkWithFile::OpenFile() { return pImpl->OpenFile(*this); }
 write_state WorkWithFile::StartHandlerWriter() { return pImpl->StartHandlerWriter(*this); }
-uint32_t WorkWithFile::hash_read_from_file() {return pImpl->hash_read_from_file(*this);}
-bool WorkWithFile::check_hash() {return pImpl->check_hash(*this);}
+uint32_t WorkWithFile::hash_read_from_file() {return pImpl->hash_read_from_file(*this); }
+bool WorkWithFile::check_hash() {return pImpl->check_hash(*this); }
+std::string WorkWithFile::get_input_buf() { return pImpl->get_input_buf(); }
 
 WorkWithFile::WorkWithFile() = default;
-WorkWithFile::WorkWithFile(const std::string& name_file, uint64_t max_file_size_ , bool hash, portig_file flag) :
-    pImpl{std::make_unique<impl>(name_file,max_file_size_,hash,flag)} {}
-std::string WorkWithFile::get_input_buf() { return pImpl->get_input_buf();};
+WorkWithFile::WorkWithFile(const std::string& name_file,
+                           uint64_t max_file_size_ ,
+                           bool hash, portig_file flag) :
+    pImpl{std::make_unique<impl>(name_file,
+                                 max_file_size_,
+                                 hash,
+                                 flag)} { }
 [[maybe_unused]] WorkWithFile::WorkWithFile(WorkWithFile&&) noexcept = default;
 WorkWithFile::~WorkWithFile() = default;
 WorkWithFile& WorkWithFile::operator=(WorkWithFile&&) noexcept = default;
