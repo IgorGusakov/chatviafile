@@ -1,11 +1,11 @@
 \label{index_md__Users_igorgusakov_project__test_Samsung_README}%
 \Hypertarget{index_md__Users_igorgusakov_project__test_Samsung_README}%
-TASK\texorpdfstring{$<$}{<} Two processes operate with one file without delaying (no sleep or timer). Maximum performance is the goal.\texorpdfstring{$>$}{>}\hypertarget{index_autotoc_md1}{}\doxysubsection{Progress}\label{index_autotoc_md1}
+Two processes(or more) operate with one file without delaying (no sleep or timer). Maximum performance is the goal.\hypertarget{index_autotoc_md1}{}\doxysubsection{Progress}\label{index_autotoc_md1}
 
 \begin{DoxyItemize}
 \item performance (DONE)
 \item documentation (DONE)
-\item unit-\/test (IN PROGRESS...)
+\item unit-\/test (DONE)
 \item bugs (DONE)
 \end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysubsection{Description}\label{index_autotoc_md2}
 This program works with a file that must be located inside the directory of the running process. You can use 2 arguments to run {\ttfamily ./testfile -\/rw -\/crc}
@@ -36,20 +36,31 @@ If you want to change the location of a file, its name or maximum file size, you
 
 \begin{DoxyItemize}
 \item Can\textquotesingle{}t specify file path via CLI
-\item File open handler or exception that will throw an open error (if it cannot be created)
-\item When reading a file, the thread loads the processor due to the endless comparison of the file size, a callback is needed that will silently wait for the file to change
-\item Interprocess Synchronization (sockets, pipes, shared memory ...) for writing and reading
-\end{DoxyItemize}\hypertarget{index_autotoc_md4}{}\doxysubsection{Building}\label{index_autotoc_md4}
+\item File open handler or exception that will throw an open error (if it cannot be created) 
+\end{DoxyItemize}\hypertarget{index_autotoc_md4}{}\doxysubsubsection{Improvements}\label{index_autotoc_md4}
+
+\begin{DoxyItemize}
+\item For reading file, the Poco/\+Directory\+Watcher library and Poco\+::delegate were added, which allows you to cross-\/platform track file changes in the directory, and create an interrupt to process the reading of new data. Thus, we will not load the processor with an endless file check.
+\end{DoxyItemize}\hypertarget{index_autotoc_md5}{}\doxysubsection{Building}\label{index_autotoc_md5}
 
 \begin{DoxyItemize}
 \item For build, you need cmake(3.\+13 or high), LLVM(GCC/\+CLANG with support c++17).
-\item {\ttfamily sudo apt install cmake g++} Install requirement
+\item {\ttfamily sudo apt install cmake g++ libpoco-\/dev} Install requirement
 \item {\ttfamily mkdir build \&\& cd build} Create folder build
 \item {\ttfamily cmake ..} run cmake build
 \item {\ttfamily make -\/j8} run build
 \item {\ttfamily ctest -\/-\/extra-\/verbose} run unit tests
 \item {\ttfamily ./testfile -\/rw -\/crc} run program(flag run see above)
-\end{DoxyItemize}\hypertarget{index_autotoc_md5}{}\doxysubsection{Detailed code documentation}\label{index_autotoc_md5}
+\end{DoxyItemize}\hypertarget{index_autotoc_md6}{}\doxysubsection{Directories for work}\label{index_autotoc_md6}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{├── bin}
+\DoxyCodeLine{│   └── testfile     // bin file}
+\DoxyCodeLine{├── dir   //after run binfile this directori will create }
+\DoxyCodeLine{    └── Testing.txt  // file chat}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md7}{}\doxysubsection{Detailed code documentation}\label{index_autotoc_md7}
 
 \begin{DoxyItemize}
 \item For detail read code generate doxygen we can run {\ttfamily ./doc/html/index.html} 

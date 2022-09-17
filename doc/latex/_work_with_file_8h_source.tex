@@ -16,53 +16,56 @@
 \DoxyCodeLine{13 \textcolor{preprocessor}{\#include <sstream>}}
 \DoxyCodeLine{14 \textcolor{preprocessor}{\#include <memory>}}
 \DoxyCodeLine{15 \textcolor{preprocessor}{\#include <experimental/propagate\_const>}}
-\DoxyCodeLine{16 }
-\DoxyCodeLine{17 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}Poco/DirectoryWatcher.h"{}}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include "{}Poco/Delegate.h"{}}}
 \DoxyCodeLine{18 }
-\DoxyCodeLine{22 \textcolor{keyword}{enum class} \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6}{portig\_file}} \{}
-\DoxyCodeLine{23   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ab50339a10e1de285ac99d4c3990b8693}{NONE}},}
-\DoxyCodeLine{24   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6a3466fab4975481651940ed328aa990e4}{READ}},}
-\DoxyCodeLine{25   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ad4b9e47f65b6e79b010582f15785867e}{WRITE}},}
-\DoxyCodeLine{26   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144}{READ\_WRITE}}}
-\DoxyCodeLine{27 \};}
-\DoxyCodeLine{28 }
-\DoxyCodeLine{32 \textcolor{keyword}{enum class} \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\_file}} \{}
-\DoxyCodeLine{33   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa1721dbaf18db104f1722faf9f589dbd0}{OPEN\_ERR}},}
-\DoxyCodeLine{34   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa8a568498bd65cd8dd2790c69a1c91dbc}{OPEN\_SUCCESS}},}
-\DoxyCodeLine{35   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa2193d921913c02d87699bdd00d77fc0d}{OPEN\_HASH\_ERR}},}
-\DoxyCodeLine{36   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779facbed805c64f0d0d7e64e5c0dd398ece0}{OPEN\_HASH\_OK}}}
-\DoxyCodeLine{37 \};}
-\DoxyCodeLine{38 }
-\DoxyCodeLine{42 \textcolor{keyword}{enum class} \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688d}{write\_state}} \{}
-\DoxyCodeLine{43   \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688dad1e0b6a1cdca1e135fac89065e719008}{START\_HANDLER}},}
-\DoxyCodeLine{44   \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688da0b11a76202ad46f0e2e71a5825ea365c}{STOP\_OK\_HANDLER}},}
-\DoxyCodeLine{45   \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688da143e0d3bb1149c543730e42cb9b8b812}{STOP\_ERR\_HANDLER}}}
-\DoxyCodeLine{46 \};}
-\DoxyCodeLine{47 }
+\DoxyCodeLine{19 }
+\DoxyCodeLine{23 \textcolor{keyword}{enum class} \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6}{portig\_file}} \{}
+\DoxyCodeLine{24   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ab50339a10e1de285ac99d4c3990b8693}{NONE}},}
+\DoxyCodeLine{25   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6a3466fab4975481651940ed328aa990e4}{READ}},}
+\DoxyCodeLine{26   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6ad4b9e47f65b6e79b010582f15785867e}{WRITE}},}
+\DoxyCodeLine{27   \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6aa7b843fb734e3b3fea8e5f902d3f4144}{READ\_WRITE}}}
+\DoxyCodeLine{28 \};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{33 \textcolor{keyword}{enum class} \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\_file}} \{}
+\DoxyCodeLine{34   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa1721dbaf18db104f1722faf9f589dbd0}{OPEN\_ERR}},}
+\DoxyCodeLine{35   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa8a568498bd65cd8dd2790c69a1c91dbc}{OPEN\_SUCCESS}},}
+\DoxyCodeLine{36   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779fa2193d921913c02d87699bdd00d77fc0d}{OPEN\_HASH\_ERR}},}
+\DoxyCodeLine{37   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779facbed805c64f0d0d7e64e5c0dd398ece0}{OPEN\_HASH\_OK}}}
+\DoxyCodeLine{38 \};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{43 \textcolor{keyword}{enum class} \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688d}{write\_state}} \{}
+\DoxyCodeLine{44   \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688dad1e0b6a1cdca1e135fac89065e719008}{START\_HANDLER}},}
+\DoxyCodeLine{45   \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688da0b11a76202ad46f0e2e71a5825ea365c}{STOP\_OK\_HANDLER}},}
+\DoxyCodeLine{46   \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688da143e0d3bb1149c543730e42cb9b8b812}{STOP\_ERR\_HANDLER}}}
+\DoxyCodeLine{47 \};}
 \DoxyCodeLine{48 }
 \DoxyCodeLine{49 }
-\DoxyCodeLine{55 \textcolor{keyword}{class }\mbox{\hyperlink{class_work_with_file}{WorkWithFile}} \{}
-\DoxyCodeLine{56 }
-\DoxyCodeLine{57   \textcolor{keyword}{class }\mbox{\hyperlink{class_work_with_file_1_1impl}{impl}};}
-\DoxyCodeLine{58   std::experimental::propagate\_const<std::unique\_ptr<impl>> pImpl;}
-\DoxyCodeLine{59  \textcolor{keyword}{public}:}
-\DoxyCodeLine{60 }
-\DoxyCodeLine{61   \mbox{\hyperlink{class_work_with_file_aa1b5a1140a50d635983af9f1ac7400f2}{WorkWithFile}}(); \textcolor{comment}{//default constr}}
-\DoxyCodeLine{69 \textcolor{comment}{}  \textcolor{keyword}{explicit} \mbox{\hyperlink{class_work_with_file_aa1b5a1140a50d635983af9f1ac7400f2}{WorkWithFile}}(\textcolor{keyword}{const} std::string\& name\_file, uint64\_t max\_file\_size\_ , \textcolor{keywordtype}{bool} hash);}
-\DoxyCodeLine{70   \mbox{\hyperlink{class_work_with_file_a697f8b712aa59199e081f8294eeb2cd9}{\string~WorkWithFile}}(); \textcolor{comment}{// default des}}
-\DoxyCodeLine{71   [[maybe\_unused]] \mbox{\hyperlink{class_work_with_file_a2144f7e6e2f4d62efb7080ee2a4b8858}{WorkWithFile}}(\mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\&\&) noexcept ; \textcolor{comment}{// move}}
-\DoxyCodeLine{72   \mbox{\hyperlink{class_work_with_file}{WorkWithFile}}(const \mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\&) = delete; \textcolor{comment}{// copy}}
-\DoxyCodeLine{73   \mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\& operator=(\mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\&\&) noexcept ; \textcolor{comment}{//move =}}
-\DoxyCodeLine{74   \mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\& operator=(const \mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\&) = delete; \textcolor{comment}{//copy =}}
-\DoxyCodeLine{75 }
-\DoxyCodeLine{76   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\_file}} \mbox{\hyperlink{class_work_with_file_a636f93140cd0f29f32e1d3545b6f8053}{OpenFile}}();}
-\DoxyCodeLine{77   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_work_with_file_af2c8c975add0419a07af653c80508aaa}{StartHandlerReader}}();}
-\DoxyCodeLine{78   \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688d}{write\_state}} \mbox{\hyperlink{class_work_with_file_a2cde4a401aca4e37c6f6d431a6110375}{StartHandlerWriter}}();}
-\DoxyCodeLine{79   uint32\_t \mbox{\hyperlink{class_work_with_file_a86cf9cca59c55e21142da278db9f9673}{hash\_read\_from\_file}}();}
-\DoxyCodeLine{80   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_work_with_file_a52c460c1104073fce08a3207338a364b}{check\_hash}}();}
-\DoxyCodeLine{81   std::\textcolor{keywordtype}{string} \mbox{\hyperlink{class_work_with_file_a13730efc6aa2c8fe5edd0f00cfd10391}{get\_input\_buf}}();}
-\DoxyCodeLine{82 \};}
-\DoxyCodeLine{83 }
-\DoxyCodeLine{84 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//TESTFILE\_\_WORKWITHFILE\_H\_}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{56 \textcolor{keyword}{class }\mbox{\hyperlink{class_work_with_file}{WorkWithFile}} \{}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58   \textcolor{keyword}{class }\mbox{\hyperlink{class_work_with_file_1_1impl}{impl}};}
+\DoxyCodeLine{59   std::experimental::propagate\_const<std::unique\_ptr<impl>> pImpl;}
+\DoxyCodeLine{60  \textcolor{keyword}{public}:}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62   \mbox{\hyperlink{class_work_with_file_aa1b5a1140a50d635983af9f1ac7400f2}{WorkWithFile}}(); \textcolor{comment}{//default constr}}
+\DoxyCodeLine{71 \textcolor{comment}{}  \textcolor{keyword}{explicit} \mbox{\hyperlink{class_work_with_file_aa1b5a1140a50d635983af9f1ac7400f2}{WorkWithFile}}(\textcolor{keyword}{const} std::string\& name\_file,}
+\DoxyCodeLine{72                         uint64\_t max\_file\_size\_ ,}
+\DoxyCodeLine{73                         \textcolor{keywordtype}{bool} hash,}
+\DoxyCodeLine{74                         \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6}{portig\_file}} flag);}
+\DoxyCodeLine{75   \mbox{\hyperlink{class_work_with_file_a697f8b712aa59199e081f8294eeb2cd9}{\string~WorkWithFile}}(); \textcolor{comment}{// default des}}
+\DoxyCodeLine{76   [[maybe\_unused]] \mbox{\hyperlink{class_work_with_file_a2144f7e6e2f4d62efb7080ee2a4b8858}{WorkWithFile}}(\mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\&\&) noexcept ; \textcolor{comment}{// move}}
+\DoxyCodeLine{77   \mbox{\hyperlink{class_work_with_file}{WorkWithFile}}(const \mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\&) = delete; \textcolor{comment}{// copy}}
+\DoxyCodeLine{78   \mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\& operator=(\mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\&\&) noexcept ; \textcolor{comment}{//move =}}
+\DoxyCodeLine{79   \mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\& operator=(const \mbox{\hyperlink{class_work_with_file}{WorkWithFile}}\&) = delete; \textcolor{comment}{//copy =}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81   \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\_file}} \mbox{\hyperlink{class_work_with_file_a636f93140cd0f29f32e1d3545b6f8053}{OpenFile}}();}
+\DoxyCodeLine{82   \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688d}{write\_state}} \mbox{\hyperlink{class_work_with_file_a2cde4a401aca4e37c6f6d431a6110375}{StartHandlerWriter}}();}
+\DoxyCodeLine{83   uint32\_t \mbox{\hyperlink{class_work_with_file_a86cf9cca59c55e21142da278db9f9673}{hash\_read\_from\_file}}();}
+\DoxyCodeLine{84   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_work_with_file_a52c460c1104073fce08a3207338a364b}{check\_hash}}();}
+\DoxyCodeLine{85   std::\textcolor{keywordtype}{string} \mbox{\hyperlink{class_work_with_file_a13730efc6aa2c8fe5edd0f00cfd10391}{get\_input\_buf}}();}
+\DoxyCodeLine{86 \};}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//TESTFILE\_\_WORKWITHFILE\_H\_}}
 
 \end{DoxyCode}

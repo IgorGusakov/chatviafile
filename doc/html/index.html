@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SAMSUNG Test Task: test_Samsung</title>
+<title>SAMSUNG Test Task: Chat via file</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,16 +69,16 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">test_Samsung </div></div>
+  <div class="headertitle"><div class="title">Chat via file </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md__Users_igorgusakov_project__test_Samsung_README"></a>TASK&lt; Two processes operate with one file without delaying (no sleep or timer). Maximum performance is the goal.&gt;</p>
+<div class="textblock"><p ><a class="anchor" id="md__Users_igorgusakov_project__test_Samsung_README"></a>Two processes(or more) operate with one file without delaying (no sleep or timer). Maximum performance is the goal.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Progress</h2>
 <ul>
 <li>performance (DONE)</li>
 <li>documentation (DONE)</li>
-<li>unit-test (IN PROGRESS...)</li>
+<li>unit-test (DONE)</li>
 <li>bugs (DONE)</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md2"></a>
@@ -104,22 +104,31 @@ Description</h2>
 Flaws</h3>
 <ul>
 <li>Can't specify file path via CLI</li>
-<li>File open handler or exception that will throw an open error (if it cannot be created)</li>
-<li>When reading a file, the thread loads the processor due to the endless comparison of the file size, a callback is needed that will silently wait for the file to change</li>
-<li>Interprocess Synchronization (sockets, pipes, shared memory ...) for writing and reading</li>
+<li>File open handler or exception that will throw an open error (if it cannot be created) </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h3><a class="anchor" id="autotoc_md4"></a>
+Improvements</h3>
+<ul>
+<li>For reading file, the Poco/DirectoryWatcher library and Poco::delegate were added, which allows you to cross-platform track file changes in the directory, and create an interrupt to process the reading of new data. Thus, we will not load the processor with an endless file check.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Building</h2>
 <ul>
 <li>For build, you need cmake(3.13 or high), LLVM(GCC/CLANG with support c++17).</li>
-<li><code>sudo apt install cmake g++</code> Install requirement</li>
+<li><code>sudo apt install cmake g++ libpoco-dev</code> Install requirement</li>
 <li><code>mkdir build &amp;&amp; cd build</code> Create folder build</li>
 <li><code>cmake ..</code> run cmake build</li>
 <li><code>make -j8</code> run build</li>
 <li><code>ctest --extra-verbose</code> run unit tests</li>
 <li><code>./testfile -rw -crc</code> run program(flag run see above)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Directories for work</h2>
+<div class="fragment"><div class="line">├── bin</div>
+<div class="line">│   └── testfile     // bin file</div>
+<div class="line">├── dir   //after run binfile this directori will create </div>
+<div class="line">    └── Testing.txt  // file chat</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
 Detailed code documentation</h2>
 <ul>
 <li>For detail read code generate doxygen we can run <code>./doc/html/index.html</code> </li>

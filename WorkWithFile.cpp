@@ -222,7 +222,9 @@ class WorkWithFile::impl
 
 
 /**
-* @brief
+* @brief The interrupt that occurs when the ./dir directory changes, we compare
+* the chat file that is boring to us and read the latest data
+* @param changeEvent changed directory data structure from poco
 */
   void onFileChanged(const Poco::DirectoryWatcher::DirectoryEvent& changeEvent)
   {
@@ -271,6 +273,7 @@ class WorkWithFile::impl
       size_read(0)
   {
     if(flag == portig_file::READ ||  flag == portig_file::READ_WRITE) {
+      std::filesystem::create_directory("../dir"); //create work directory for file
       watcher = new Poco::DirectoryWatcher(std::string("../dir"),
                                            Poco::DirectoryWatcher::DW_ITEM_MODIFIED, //event modified
                                            1); //1 sec interview

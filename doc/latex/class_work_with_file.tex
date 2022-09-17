@@ -14,7 +14,7 @@ class \mbox{\hyperlink{class_work_with_file_1_1impl}{impl}}
 \item 
 \mbox{\hyperlink{class_work_with_file_aa1b5a1140a50d635983af9f1ac7400f2}{Work\+With\+File}} ()
 \item 
-\mbox{\hyperlink{class_work_with_file_abfd73a6d808ff9161f8b18c96f454c4b}{Work\+With\+File}} (const std\+::string \&name\+\_\+file, uint64\+\_\+t max\+\_\+file\+\_\+size\+\_\+, bool hash)
+\mbox{\hyperlink{class_work_with_file_a63c618eb3fb45110840b6fc9d7dfa366}{Work\+With\+File}} (const std\+::string \&name\+\_\+file, uint64\+\_\+t max\+\_\+file\+\_\+size\+\_\+, bool hash, \mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6}{portig\+\_\+file}} flag)
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_work_with_file_a697f8b712aa59199e081f8294eeb2cd9}{$\sim$\+Work\+With\+File}} ()
 \item 
@@ -27,8 +27,6 @@ class \mbox{\hyperlink{class_work_with_file_1_1impl}{impl}}
 \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \& \mbox{\hyperlink{class_work_with_file_a4ce08a87fb50e22232c9d71204feafc5}{operator=}} (const \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \&)=delete
 \item 
 \mbox{\hyperlink{_work_with_file_8h_aa2f55816a31b4353973d92ee801a779f}{open\+\_\+file}} \mbox{\hyperlink{class_work_with_file_a636f93140cd0f29f32e1d3545b6f8053}{Open\+File}} ()
-\item 
-void \mbox{\hyperlink{class_work_with_file_af2c8c975add0419a07af653c80508aaa}{Start\+Handler\+Reader}} ()
 \item 
 \mbox{\hyperlink{_work_with_file_8h_a5ed0172019dfa72bf69d881d3f06688d}{write\+\_\+state}} \mbox{\hyperlink{class_work_with_file_a2cde4a401aca4e37c6f6d431a6110375}{Start\+Handler\+Writer}} ()
 \item 
@@ -47,11 +45,11 @@ std\+::string \mbox{\hyperlink{class_work_with_file_a13730efc6aa2c8fe5edd0f00cfd
 \doxysubsubsection{\texorpdfstring{WorkWithFile()}{WorkWithFile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily Work\+With\+File\+::\+Work\+With\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
 
-\mbox{\Hypertarget{class_work_with_file_abfd73a6d808ff9161f8b18c96f454c4b}\label{class_work_with_file_abfd73a6d808ff9161f8b18c96f454c4b}} 
+\mbox{\Hypertarget{class_work_with_file_a63c618eb3fb45110840b6fc9d7dfa366}\label{class_work_with_file_a63c618eb3fb45110840b6fc9d7dfa366}} 
 \index{WorkWithFile@{WorkWithFile}!WorkWithFile@{WorkWithFile}}
 \index{WorkWithFile@{WorkWithFile}!WorkWithFile@{WorkWithFile}}
 \doxysubsubsection{\texorpdfstring{WorkWithFile()}{WorkWithFile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily Work\+With\+File\+::\+Work\+With\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name\+\_\+file,  }\item[{uint64\+\_\+t}]{max\+\_\+file\+\_\+size\+\_\+,  }\item[{bool}]{hash }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+{\footnotesize\ttfamily Work\+With\+File\+::\+Work\+With\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name\+\_\+file,  }\item[{uint64\+\_\+t}]{max\+\_\+file\+\_\+size\+\_\+,  }\item[{bool}]{hash,  }\item[{\mbox{\hyperlink{_work_with_file_8h_af05aa23fc8774a543a5d688abd18f8a6}{portig\+\_\+file}}}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
 
@@ -59,11 +57,13 @@ Constructor \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}}.
 
 Create a new \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} object with param. 
 \begin{DoxyParams}{Parameters}
-{\em name\+\_\+file} & set name file @default std\+::string \char`\"{}\+Test.\+txt\char`\"{} \\
+{\em name\+\_\+file} & set name file \\
 \hline
-{\em max\+\_\+file\+\_\+size\+\_\+} & set max file @default uint64\+\_\+t 5\textquotesingle{}000\textquotesingle{}000 bytes \\
+{\em max\+\_\+file\+\_\+size\+\_\+} & set max file \\
 \hline
-{\em hash} & on/off hash to file @default boll false \\
+{\em hash} & on/off hash to file \\
+\hline
+{\em flag} & flag open file -\/r -\/w -\/rw \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_work_with_file_a697f8b712aa59199e081f8294eeb2cd9}\label{class_work_with_file_a697f8b712aa59199e081f8294eeb2cd9}} 
@@ -122,12 +122,6 @@ Create a new \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} object wi
 \index{operator=@{operator=}!WorkWithFile@{WorkWithFile}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \& Work\+With\+File\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_work_with_file}{Work\+With\+File}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
-
-\mbox{\Hypertarget{class_work_with_file_af2c8c975add0419a07af653c80508aaa}\label{class_work_with_file_af2c8c975add0419a07af653c80508aaa}} 
-\index{WorkWithFile@{WorkWithFile}!StartHandlerReader@{StartHandlerReader}}
-\index{StartHandlerReader@{StartHandlerReader}!WorkWithFile@{WorkWithFile}}
-\doxysubsubsection{\texorpdfstring{StartHandlerReader()}{StartHandlerReader()}}
-{\footnotesize\ttfamily void Work\+With\+File\+::\+Start\+Handler\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{class_work_with_file_a2cde4a401aca4e37c6f6d431a6110375}\label{class_work_with_file_a2cde4a401aca4e37c6f6d431a6110375}} 
 \index{WorkWithFile@{WorkWithFile}!StartHandlerWriter@{StartHandlerWriter}}

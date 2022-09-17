@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['test_5fsamsung_0',['test_Samsung',['../index.html',1,'']]]
+  ['chat_20via_20file_0',['Chat via file',['../index.html',1,'']]]
 ];

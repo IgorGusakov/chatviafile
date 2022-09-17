@@ -1,12 +1,11 @@
-# test_Samsung
-TASK<
-Two processes operate with one file without delaying (no sleep or timer). 
-Maximum performance is the goal.>
+# Chat via file
+Two processes(or more) operate with one file without delaying (no sleep or timer). 
+Maximum performance is the goal.
 
 ### Progress 
 - performance (DONE)
 - documentation (DONE)
-- unit-test (IN PROGRESS...)
+- unit-test (DONE)
 - bugs (DONE)
 
 ### Description
@@ -34,17 +33,25 @@ you need to open *main.cpp* and change
 #### Flaws
  - Can't specify file path via CLI
  - File open handler or exception that will throw an open error (if it cannot be created)
- - When reading a file, the thread loads the processor due to the endless comparison of the file size, a callback is needed that will silently wait for the file to change
- - Interprocess Synchronization (sockets, pipes, shared memory ...) for writing and reading
+#### Improvements
+  - For reading file, the Poco/DirectoryWatcher library and Poco::delegate were added, which allows you to cross-platform track file changes in the directory, and create an interrupt to process the reading of new data. Thus, we will not load the processor with an endless file check.
 
 ### Building
  - For build, you need cmake(3.13 or high), LLVM(GCC/CLANG with support c++17).
- - ``` sudo apt install cmake g++``` Install requirement
+ - ``` sudo apt install cmake g++ libpoco-dev``` Install requirement
  - ``` mkdir build && cd build ``` Create folder build
  - ``` cmake .. ``` run cmake build
  - ``` make -j8 ``` run build
  - ``` ctest --extra-verbose ``` run unit tests
  - ``` ./testfile -rw -crc``` run program(flag run see above)
+
+### Directories for work
+```
+├── bin
+│   └── testfile     // bin file
+├── dir   //after run binfile this directori will create 
+    └── Testing.txt  // file chat
+```
 
 ### Detailed code documentation
 - For detail read code generate doxygen we can run ``` ./doc/html/index.html ```
